@@ -57,6 +57,7 @@ public class EnemyController : HPObjectController
             EventPool.OptIn(EventPool.stopGameEvent, restartGame);
         }
         animator = GetComponentInChildren<Animator>();
+        EventPool.OptIn("Beat", Move);
         //animator.SetFloat("speed", 1);
     }
 
@@ -74,40 +75,44 @@ public class EnemyController : HPObjectController
             base.Update();
         }
     }
+    void Move()
+    {
 
+         transform.Translate(movingDir.normalized * GameMaster.Instance.gridSize);
+    }
     private void LateUpdate()
     {
-        if (GameManager.Instance.isInGame)
-        {
-            var speed = moveSpeed;
-            if (ignoreTimeControl)
-            {
-                if(player.GetComponent<EnemyGenerator>().showMoveLevel <= player.GetComponent<EnemyGenerator>().currentDifficulty)
-                {
+        //if (GameManager.Instance.isInGame)
+        //{
+        //    var speed = moveSpeed;
+        //    if (ignoreTimeControl)
+        //    {
+        //        if(player.GetComponent<EnemyGenerator>().showMoveLevel <= player.GetComponent<EnemyGenerator>().currentDifficulty)
+        //        {
 
-                    // Vector3 position = new Vector3(player.transform.position.x, rb.position.y + movingDir.y * speed * 0.02f, transform.position.z);
-                    transform.Translate(movingDir * speed * 0.02f);
-                    transform.position = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
-                    if (Mathf.Abs(transform.position.y - player.transform.position.y) <= 10)
-                    {
-                        player.getDamage(1);
-                        EventPool.Trigger("killedByShadow");
-                        if (player.isDead)
-                        {
+        //            // Vector3 position = new Vector3(player.transform.position.x, rb.position.y + movingDir.y * speed * 0.02f, transform.position.z);
+        //            transform.Translate(movingDir * speed * 0.02f);
+        //            transform.position = new Vector3(player.transform.position.x, transform.position.y, transform.position.z);
+        //            if (Mathf.Abs(transform.position.y - player.transform.position.y) <= 10)
+        //            {
+        //                player.getDamage(1);
+        //                EventPool.Trigger("killedByShadow");
+        //                if (player.isDead)
+        //                {
 
-                        }
-                    }
-                    // rb.MovePosition(position);
-                }
-            }
-            else
-            {
-                rb.MovePosition(rb.position + movingDir * speed * Time.fixedDeltaTime);
+        //                }
+        //            }
+        //            // rb.MovePosition(position);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        //rb.MovePosition(rb.position + movingDir * speed * Time.fixedDeltaTime);
 
-            }
-            testFlip(movingDir);
-            // rb.velocity = new Vector2(movement.x * moveSpeed, movement.y * moveSpeed);
-        }
+        //    }
+        //    testFlip(movingDir);
+        //    // rb.velocity = new Vector2(movement.x * moveSpeed, movement.y * moveSpeed);
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

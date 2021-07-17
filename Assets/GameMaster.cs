@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Pool;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +42,8 @@ public class GameMaster : Singleton<GameMaster>
     private float beatActiveTime = 0f;
     new private bool enabled;
     float invokeTime;
+
+    public float gridSize = 0.75f;
     public bool hasBeatInput
     {
         get
@@ -68,6 +71,8 @@ public class GameMaster : Singleton<GameMaster>
     [Range(0.25f, 0.5f)]
     public float spriteFlashTime = 0.5f;
 
+    PlayerController player;
+
     //fever variables
     bool fever;
     float feverTimeHold;
@@ -87,6 +92,9 @@ public class GameMaster : Singleton<GameMaster>
 
         commandType = new int[4] { 0, 0, 0, 0 };
         audioSource = GetComponent<AudioSource>();
+        player = FindObjectOfType<PlayerController>();
+        player.gridSize = gridSize;
+        player.transform.position = Utils.snapToGrid(gridSize, player.transform.position);
         //audioSources = GetComponents<AudioSource>();
         //masterBeat = audioSources[0];
         //commandMutedBeat = audioSources[1];
@@ -136,7 +144,7 @@ public class GameMaster : Singleton<GameMaster>
                     inactiveBeatCount = 0;
                     commandCount = 0;
                 }
-                Array.Clear(commandType, 0, commandType.Length);
+                clearCommand();
             }
         }
 
@@ -145,21 +153,22 @@ public class GameMaster : Singleton<GameMaster>
             print("double beat not allowed");
             hasBeatInput = false;
             lastBeatHasInput = true;
-            Array.Clear(commandType, 0, commandType.Length);
+            clearCommand();
         }
 
-        GetDrumInputs();
+            GetDrumInputs();
+        
 
         if (!allowedToBeat && Input.anyKeyDown)
         {                     //mistiming beat with master beat
-            //audioSource.PlayOneShot(beatMissSigh);
-            Array.Clear(commandType, 0, commandType.Length);
+            audioSource.PlayOneShot(beatMissSigh);
+            clearCommand();
             commandCount = 0;
         }
 
         if (inactiveBeatCount > 0 && Input.anyKeyDown)
         {               //interrupting command
-            Array.Clear(commandType, 0, commandType.Length);
+            clearCommand();
             commandCount = 0;
             //do physical motion stop here
         }
@@ -168,7 +177,7 @@ public class GameMaster : Singleton<GameMaster>
         if (Time.time - beatActiveTime >= errorMarginTime && lastBeatHasInput && allowedToBeat)
         {      //skipping a master beat
             lastBeatHasInput = true;
-            Array.Clear(commandType, 0, commandType.Length);
+            clearCommand();
 
         }
 
@@ -198,6 +207,13 @@ public class GameMaster : Singleton<GameMaster>
         }
     }
 
+    void clearCommand()
+    {
+
+        Array.Clear(commandType, 0, commandType.Length);
+        EventPool.Trigger("BeatClear");
+    }
+
 
     void AllowBeat()
     {
@@ -216,6 +232,8 @@ public class GameMaster : Singleton<GameMaster>
     }
     void PlayMasterBeat()
     {
+        //player.Move();
+        EventPool.Trigger("Beat");
         if ((inactiveBeatCount--) > 0)
         {
             audioSource.PlayOneShot(commandMutedBeat);
@@ -235,161 +253,100 @@ public class GameMaster : Singleton<GameMaster>
 
     void GetDrumInputs()
     {
-        if (allowedToBeat)
+        if (allowedToBeat && !hasBeatInput)
         {
-            for (int i = 0; i < 4; i++)
+
+            if (inactiveBeatCount <= 0/* && Input.GetKey(KeyCode.Space)*/)
             {
+                for (int i = 0; i < 4; i++)
+            {
+                    if (commandType[i] == 0)
+                    {
+                        if (Input.GetKeyDown(KeyCode.LeftArrow))
+                        {
+                            Debug.Log("command id " + i);
+                            Debug.Log("left");
+                            commandType[i] = 1;
+                            hasBeatInput = true;
+                            audioSource.PlayOneShot(drumLeft);
+                            currentDrumSprite = drumLeftSprite;
+                            currentDrumSprite.color = flashColor;
+                            EventPool.Trigger("BeatDown", i, 1);
+                            break;
+                        }
+                        else
+                        if (Input.GetKeyDown(KeyCode.RightArrow))
+                        {
+                            commandType[i] = 2;
+                            hasBeatInput = true;
+                            audioSource.PlayOneShot(drumRight);
+                            currentDrumSprite = drumRightSprite;
+                            currentDrumSprite.color = flashColor;
+                            EventPool.Trigger("BeatDown", i, 2);
+                            break;
+                        }
+                        else
+                        if (Input.GetKeyDown(KeyCode.UpArrow))
+                        {
+                            commandType[i] = 3;
+                            hasBeatInput = true;
+                            audioSource.PlayOneShot(drumTop);
+                            currentDrumSprite = drumTopSprite;
+                            currentDrumSprite.color = flashColor;
+                            EventPool.Trigger("BeatDown", i, 3);
+                            break;
+                        }
+                        else
+                        if (Input.GetKeyDown(KeyCode.DownArrow))
+                        {
+                            commandType[i] = 4;
+                            hasBeatInput = true;
+                            audioSource.PlayOneShot(drumDown);
+                            currentDrumSprite = drumBottomSprite;
+                            currentDrumSprite.color = flashColor;
+                            EventPool.Trigger("BeatDown", i, 4);
+                            break;
+                        }
+                    }
 
-                if (commandType[i] == 0)
-                {
-                    if (Input.GetKeyDown(KeyCode.Alpha1))
-                    {
-                        Debug.Log("left");
-                        commandType[i] = 1;
-                        hasBeatInput = true;
-                        audioSource.PlayOneShot(drumLeft);
-                        currentDrumSprite = drumLeftSprite;
-                        currentDrumSprite.color = flashColor;
-                        break;
-                    }
-                    else
-                    if (Input.GetKeyDown(KeyCode.Alpha2))
-                    {
-                        commandType[i] = 2;
-                        hasBeatInput = true;
-                        audioSource.PlayOneShot(drumRight);
-                        currentDrumSprite = drumRightSprite;
-                        currentDrumSprite.color = flashColor;
-                        break;
-                    }
-                    else
-                    if (Input.GetKeyDown(KeyCode.Alpha3))
-                    {
-                        commandType[i] = 3;
-                        hasBeatInput = true;
-                        audioSource.PlayOneShot(drumTop);
-                        currentDrumSprite = drumTopSprite;
-                        currentDrumSprite.color = flashColor;
-                        break;
-                    }
-                    else
-                    if (Input.GetKeyDown(KeyCode.Alpha4))
-                    {
-                        commandType[i] = 4;
-                        hasBeatInput = true;
-                        audioSource.PlayOneShot(drumDown);
-                        currentDrumSprite = drumBottomSprite;
-                        currentDrumSprite.color = flashColor;
-                        break;
-                    }
+
                 }
-
             }
-            //else if (commandType[1] == 0)
-            //{
-            //    if (Input.GetButtonDown("Left"))
-            //    {
-            //        commandType[1] = 1;
-            //        hasBeatInput = true;
-            //        drumLeft.Play();
-            //        currentDrumSprite = drumLeftSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //    else if (Input.GetButtonDown("Right"))
-            //    {
-            //        commandType[1] = 2;
-            //        hasBeatInput = true;
-            //        drumRight.Play();
-            //        currentDrumSprite = drumRightSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //    else if (Input.GetButtonDown("Top"))
-            //    {
-            //        commandType[1] = 3;
-            //        hasBeatInput = true;
-            //        drumTop.Play();
-            //        currentDrumSprite = drumTopSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //    else if (Input.GetButtonDown("Down"))
-            //    {
-            //        commandType[1] = 4;
-            //        hasBeatInput = true;
-            //        drumBottom.Play();
-            //        currentDrumSprite = drumBottomSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //}
-            //else if (commandType[2] == 0)
-            //{
-            //    if (Input.GetButtonDown("Left"))
-            //    {
-            //        commandType[2] = 1;
-            //        hasBeatInput = true;
-            //        drumLeft.Play();
-            //        currentDrumSprite = drumLeftSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //    else if (Input.GetButtonDown("Right"))
-            //    {
-            //        commandType[2] = 2;
-            //        hasBeatInput = true;
-            //        drumRight.Play();
-            //        currentDrumSprite = drumRightSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //    else if (Input.GetButtonDown("Top"))
-            //    {
-            //        commandType[2] = 3;
-            //        hasBeatInput = true;
-            //        drumTop.Play();
-            //        currentDrumSprite = drumTopSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //    else if (Input.GetButtonDown("Down"))
-            //    {
-            //        commandType[2] = 4;
-            //        hasBeatInput = true;
-            //        drumBottom.Play();
-            //        currentDrumSprite = drumBottomSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //}
-            //else if (commandType[3] == 0)
-            //{
-            //    if (Input.GetButtonDown("Left"))
-            //    {
-            //        commandType[3] = 1;
-            //        hasBeatInput = true;
-            //        drumLeft.Play();
-            //        currentDrumSprite = drumLeftSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //    else if (Input.GetButtonDown("Right"))
-            //    {
-            //        commandType[3] = 2;
-            //        hasBeatInput = true;
-            //        drumRight.Play();
-            //        currentDrumSprite = drumRightSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //    else if (Input.GetButtonDown("Top"))
-            //    {
-            //        commandType[3] = 3;
-            //        hasBeatInput = true;
-            //        drumTop.Play();
-            //        currentDrumSprite = drumTopSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //    else if (Input.GetButtonDown("Down"))
-            //    {
-            //        commandType[3] = 4;
-            //        hasBeatInput = true;
-            //        drumBottom.Play();
-            //        currentDrumSprite = drumBottomSprite;
-            //        currentDrumSprite.color = flashColor;
-            //    }
-            //}
+            //else
+            {
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+
+                    hasBeatInput = true;
+                    player.Move(new Vector2(-1, 0));
+
+                    //Array.Clear(commandType, 0, commandType.Length);
+                }
+                else if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+
+                    hasBeatInput = true;
+                    player.Move(new Vector2(1, 0));
+
+                    //Array.Clear(commandType, 0, commandType.Length);
+                }
+                else if (Input.GetKeyDown(KeyCode.UpArrow))
+                {
+
+                    hasBeatInput = true;
+                    player.Move(new Vector2(0, 1));
+
+                    //Array.Clear(commandType, 0, commandType.Length);
+                }
+                else if (Input.GetKeyDown(KeyCode.DownArrow))
+                {
+
+                    hasBeatInput = true;
+                    player.Move(new Vector2(0, -1));
+
+                   // Array.Clear(commandType, 0, commandType.Length);
+                }
+            }
         }
         lastBeatHasInput = !hasBeatInput;
     }

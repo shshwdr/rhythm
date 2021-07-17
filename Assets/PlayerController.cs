@@ -11,6 +11,7 @@ public class PlayerController : HPObjectController
     [HideInInspector]
     public float walkedDistance = 0;
     bool isConversation;
+    public float gridSize = 0.15f;
 
     Vector3 originalPosition;
     // Start is called before the first frame update
@@ -23,6 +24,13 @@ public class PlayerController : HPObjectController
         originalPosition = transform.position;
     }
 
+    public void Move(Vector3 dir)
+    {
+        //detect if collide
+        transform.Translate(dir * gridSize);
+        movement = Vector2.zero;
+    }
+
     // Update is called once per frame
     protected override void Update()
     {
@@ -31,13 +39,29 @@ public class PlayerController : HPObjectController
             return;
         }
         base.Update();
-        movement.x = Input.GetAxisRaw("Horizontal");
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+        if(x == 0&&y == 0)
+        {
 
+        }
+        else
+        {
+
+            if (x != 0)
+            {
+                movement.y = 0;
+                movement.x = x;
+            }
+            else
+            {
+
+                movement.x = 0;
+                movement.y = y;
+            }
+        }
         //Get input from the input manager, round it to an integer and store in vertical to set y axis move direction
-        movement.y = Input.GetAxisRaw("Vertical");
-        float speed = movement.sqrMagnitude;
-
-        movement = Vector2.ClampMagnitude(movement, 1);
+        //float speed = movement.sqrMagnitude;
         //if (controlTime)
         //{Time.timeScale = speed;
         //    //if (speed > 0)
@@ -52,19 +76,19 @@ public class PlayerController : HPObjectController
     }
     private void LateUpdate()
     {
-        if (isConversation)
-        {
-            return;
-        }
-        var speed = moveSpeed;
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
-        testFlip(movement);
-        //Time.fixedDeltaTime = Time.timeScale * 0.01f;
-        if (GameManager.Instance.isInGame)
-        {
+        //if (isConversation)
+        //{
+        //    return;
+        //}
+        //var speed = moveSpeed;
+        //rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        //testFlip(movement);
+        ////Time.fixedDeltaTime = Time.timeScale * 0.01f;
+        //if (GameManager.Instance.isInGame)
+        //{
 
-            walkedDistance += movement.magnitude * speed * Time.fixedDeltaTime;
-        }
+        //    walkedDistance += movement.magnitude * speed * Time.fixedDeltaTime;
+        //}
         //rb.AddForce(new Vector2(movement.x * moveSpeed, movement.y * moveSpeed));
         //rb.velocity += new Vector2(movement.x * moveSpeed, movement.y * moveSpeed);
     }

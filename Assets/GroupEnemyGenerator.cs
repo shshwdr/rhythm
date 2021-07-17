@@ -74,8 +74,8 @@ public class GroupEnemyGenerator : MonoBehaviour
             {
                 return res;
             }
-            Vector3 randomedV = Utils.randomVector3_2d(v, randomnessScale*prefabSize);
-            go.transform.position = randomedV;
+            //Vector3 randomedV = Utils.randomVector3_2d(v, randomnessScale*prefabSize);
+            go.transform.position = v;
             go.GetComponent<PoolObject>().fetch();
             res.Add(go);
         }

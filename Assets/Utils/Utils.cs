@@ -30,4 +30,13 @@ public class Utils : MonoBehaviour
         int random = UnityEngine.Random.Range(0, values.Length);
         return (T)values.GetValue(random);
     }
+
+    static float snapFloat(float gridSize,float origin)
+    {
+        return Mathf.Round(origin / gridSize) * gridSize;
+    }
+    public static Vector3 snapToGrid(float gridSize, Vector3 origin)
+    {
+        return new Vector3(snapFloat(gridSize, origin.x), snapFloat(gridSize, origin.y), snapFloat(gridSize, origin.z));
+    }
 }

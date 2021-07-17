@@ -13,6 +13,15 @@ public class TeamController : MonoBehaviour
     Animator[] spriteAnimators;
     Rigidbody2D thisRigidbody;
 
+    public Transform instructionsUI;
+
+    public List<List<int>> instructions = new List<List<int>>()
+    {
+        new List<int>(){3,4,0,0},
+        new List<int>(){1,2,0,0},
+
+    };
+
     [HideInInspector] public int secondsToBeats;
 
     //movement variables
@@ -30,10 +39,20 @@ public class TeamController : MonoBehaviour
         thisRigidbody = GetComponent<Rigidbody2D>();
 
         unmatchedCommand = GetComponent<AudioSource>();
-
+        InitInstructionUI();
         //spriteAnimators = GetComponentsInChildren<Animator>();
         //sprite1Animator = spriteAnimators[0];
         //sprite2Animator = spriteAnimators[1];
+    }
+
+    void InitInstructionUI()
+    {
+        int i = 0;
+        foreach(Transform child in instructionsUI)
+        {
+            child.GetComponent<OneInstructionRow>().Init(instructions[i].ToArray());
+            i++;
+        }
     }
 
     private void Update()
@@ -43,13 +62,14 @@ public class TeamController : MonoBehaviour
     }
 
 
+
     public bool GetInput(int[] commandType)
     {
 
         //walk
-        if (ArrayCompare(commandType, new int[] { 1, 1, 1, 2 }))
+        if (ArrayCompare(commandType, new int[] { 3,4 }))
         {
-            Debug.Log("walk");
+            Debug.Log("up");
             GetComponent<ForwardAutoShoot>().startShoot();
             //Vector2 currentPosition = new Vector2(transform.position.x, transform.position.y);
             //thisRigidbody.DOMove(currentPosition + (Vector2.left * moveDistance), secondsToBeats, false);
@@ -60,9 +80,9 @@ public class TeamController : MonoBehaviour
             return true;
         }
         //jump
-        else if (ArrayCompare(commandType, new int[] { 3, 3, 1, 2 }))
+        else if (ArrayCompare(commandType, new int[] { 1, 2 }))
         {
-            Debug.Log("jump");
+            Debug.Log("side");
             GetComponent<SideAutoShoot>().startShoot();
             //Vector2 currentPosition = new Vector2(transform.position.x, transform.position.y);
             //thisRigidbody.DOJump(currentPosition + (Vector2.up * jumpHeight), 0.5f, 0, secondsToBeats, false);
@@ -82,9 +102,9 @@ public class TeamController : MonoBehaviour
 
     bool ArrayCompare(int[] array1, int[] array2)
     {
-        if (array1.Length != array2.Length)
-            return false;
-        for (var i = 0; i < array1.Length; i++)
+        //if (array1.Length != array2.Length)
+        //    return false;
+        for (var i = 0; i < array2.Length; i++)
         {
             if (array1[i] != array2[i])
                 return false;
