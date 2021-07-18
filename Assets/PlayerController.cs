@@ -24,11 +24,11 @@ public class PlayerController : HPObjectController
         originalPosition = transform.position;
     }
 
-    public void Move(Vector3 dir)
+    public override bool Move(Vector3 dir)
     {
-        //detect if collide
-        transform.Translate(dir * gridSize);
+        base.Move(dir);
         movement = Vector2.zero;
+        return true;
     }
 
     // Update is called once per frame

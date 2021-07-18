@@ -47,11 +47,10 @@ public class TeamController : MonoBehaviour
 
     void InitInstructionUI()
     {
-        int i = 0;
-        foreach(Transform child in instructionsUI)
+        for(int i = 0;i< instructionsUI.childCount-1;i++) 
         {
+            Transform child = instructionsUI.GetChild(i);
             child.GetComponent<OneInstructionRow>().Init(instructions[i].ToArray());
-            i++;
         }
     }
 

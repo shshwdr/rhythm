@@ -13,6 +13,7 @@ public class EnemyController : HPObjectController
     protected PlayerController player;
     public GameObject coin;
     public GameObject ability;
+    
 
 
     Vector3 originalPosition;
@@ -59,6 +60,7 @@ public class EnemyController : HPObjectController
         animator = GetComponentInChildren<Animator>();
         EventPool.OptIn("Beat", Move);
         //animator.SetFloat("speed", 1);
+        moveMode = 1;
     }
 
     void restartGame()
@@ -77,8 +79,12 @@ public class EnemyController : HPObjectController
     }
     void Move()
     {
-
-         transform.Translate(movingDir.normalized * GameMaster.Instance.gridSize);
+        bool succeed  = base.Move(movingDir.normalized);
+        if (!succeed)
+        {
+            movingDir = -movingDir;
+        }
+         //transform.Translate(movingDir.normalized * GameMaster.Instance.gridSize);
     }
     private void LateUpdate()
     {

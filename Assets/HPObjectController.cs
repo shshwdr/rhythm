@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,6 +30,11 @@ public class HPObjectController : MonoBehaviour
     public GameObject hideWhenFarAway;
     float hideDistance = 100f;
     public bool isImmortal = false;
+    float moveTime = 0.12f;
+
+    protected float gridSize;
+
+    public int moveMode;
     // Start is called before the first frame update
     virtual protected void Awake()
     {
@@ -36,9 +42,61 @@ public class HPObjectController : MonoBehaviour
         //emotesController = GetComponentInChildren<EmotesController>();
         hpBar = GetComponentInChildren<HPBarHandler>();
         rb = GetComponent<Rigidbody2D>();
+        gridSize = GameMaster.Instance.gridSize;
 
-       // player = GameObject.Find("Player");
+        transform.position = Utils.snapToGridCenter(gridSize, transform.position);
+        // player = GameObject.Find("Player");
         //hideDistance = player.GetComponent<PlayerController>().hideDistance;
+
+    }
+
+    bool checkIfCollide(Vector3 dir)
+    {
+        int layerMask = LayerMask.GetMask("wall");
+
+        RaycastHit hit;
+        // Does the ray intersect any objects excluding the player layer
+        if (Physics2D.Raycast(transform.position, dir, gridSize*0.9f, layerMask))
+        {
+            Debug.DrawRay(transform.position, dir * 100*0.9f, Color.yellow);
+            Debug.Log("Did Hit");
+            return true;
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, dir * 100 * 0.9f, Color.red);
+            Debug.Log("Did not Hit");
+            return false;
+        }
+    }
+
+    public virtual bool Move(Vector3 dir)
+    {
+        //do extra work for enemy
+        bool willCollider = checkIfCollide(dir);
+        if (!willCollider)
+        {
+
+            //detect if collide
+            //transform.Translate(dir * gridSize);
+            if(moveMode == 0)
+            {
+
+                transform.Translate(dir * gridSize);
+                //transform.DOMove(transform.position + dir * gridSize, moveTime);//.SetEase(Ease.OutBack);
+            }else if(moveMode == 1)
+            {
+
+                transform.Translate(dir * gridSize);
+                //transform.DOJump(transform.position + dir * gridSize, 0.4f, 1, moveTime);
+            }
+            return true;
+        }
+        else
+        {
+            dir = -dir;
+            return false;
+        }
 
     }
     virtual protected void Start()

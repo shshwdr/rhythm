@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OneInstructionRow : MonoBehaviour
+public class CurrentInstructionRow : MonoBehaviour
 {
     OneInstruction[] instructions;
     int[] instructionList;
@@ -12,32 +12,35 @@ public class OneInstructionRow : MonoBehaviour
     void Awake()
     {
         instructions = GetComponentsInChildren<OneInstruction>();
-        EventPool.OptIn<int,int>("BeatDown", beatDown);
+        EventPool.OptIn<int, int>("BeatDown", beatDown);
         EventPool.OptIn("BeatClear", beatClear);
+        Init();
         //EventPool.OptIn<int>("BeatDown", beatDown);
     }
-    void beatDown(int beatId,int actionId) {
+    void beatDown(int beatId, int actionId)
+    {
         if (isDisabled)
         {
             return;
         }
         //Debug.Log("instruction list "+instructionList+" beat id " + beatId + " actioinId " + actionId+" expected action "+ instructionList[beatId]);
-        if(actionId == instructionList[beatId] || instructionList[beatId] == 0)
+        //if (actionId == instructionList[beatId] || instructionList[beatId] == 0)
         {
+            instructions[beatId].gameObject.SetActive(true);
+            instructions[beatId].Init(actionId);
             instructions[beatId].beatDown();
         }
-        else
+        //else
         {
-            beatDisable();
+         //   beatDisable();
         }
     }
 
     void beatClear()
     {
-        isDisabled = false;
-        foreach (var ins in instructions)
+        for (int i = 0; i < instructions.Length; i++)
         {
-            ins.beatClear();
+            instructions[i].gameObject.SetActive(false);
         }
     }
     void beatDisable()
@@ -48,18 +51,18 @@ public class OneInstructionRow : MonoBehaviour
             ins.beatDisable();
         }
     }
-    public void Init(int[] list)
+    public void Init()
     {
-        instructionList = list;
-        for(int i = 0;i< instructionList.Length;i++)
+        //instructionList = list;
+        for (int i = 0; i < instructions.Length; i++)
         {
-            instructions[i].Init(instructionList[i]);
+            instructions[i].gameObject.SetActive(false);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

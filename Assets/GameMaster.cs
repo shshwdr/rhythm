@@ -94,7 +94,6 @@ public class GameMaster : Singleton<GameMaster>
         audioSource = GetComponent<AudioSource>();
         player = FindObjectOfType<PlayerController>();
         player.gridSize = gridSize;
-        player.transform.position = Utils.snapToGrid(gridSize, player.transform.position);
         //audioSources = GetComponents<AudioSource>();
         //masterBeat = audioSources[0];
         //commandMutedBeat = audioSources[1];
@@ -151,13 +150,13 @@ public class GameMaster : Singleton<GameMaster>
         if (allowedToBeat && hasBeatInput && Input.anyKeyDown)
         {      //double beat per master beat
             print("double beat not allowed");
-            hasBeatInput = false;
+            //hasBeatInput = false;
             lastBeatHasInput = true;
             clearCommand();
         }
 
-            GetDrumInputs();
-        
+        GetDrumInputs();
+
 
         if (!allowedToBeat && Input.anyKeyDown)
         {                     //mistiming beat with master beat
@@ -224,7 +223,7 @@ public class GameMaster : Singleton<GameMaster>
 
         allowedToBeat = true;
         Debug.Log("allow!");
-
+        inactiveBeatCount--;
         if (hasBeatInput)
         {
             hasBeatInput = false;
@@ -234,7 +233,7 @@ public class GameMaster : Singleton<GameMaster>
     {
         //player.Move();
         EventPool.Trigger("Beat");
-        if ((inactiveBeatCount--) > 0)
+        if ((inactiveBeatCount) >= 0)
         {
             audioSource.PlayOneShot(commandMutedBeat);
         }
@@ -256,10 +255,10 @@ public class GameMaster : Singleton<GameMaster>
         if (allowedToBeat && !hasBeatInput)
         {
 
-            if (inactiveBeatCount <= 0/* && Input.GetKey(KeyCode.Space)*/)
+            if (inactiveBeatCount < 0/* && Input.GetKey(KeyCode.Space)*/)
             {
                 for (int i = 0; i < 4; i++)
-            {
+                {
                     if (commandType[i] == 0)
                     {
                         if (Input.GetKeyDown(KeyCode.LeftArrow))
@@ -344,7 +343,7 @@ public class GameMaster : Singleton<GameMaster>
                     hasBeatInput = true;
                     player.Move(new Vector2(0, -1));
 
-                   // Array.Clear(commandType, 0, commandType.Length);
+                    // Array.Clear(commandType, 0, commandType.Length);
                 }
             }
         }

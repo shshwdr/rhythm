@@ -35,8 +35,19 @@ public class Utils : MonoBehaviour
     {
         return Mathf.Round(origin / gridSize) * gridSize;
     }
+
+    static float snapFloatCenter(float gridSize, float origin)
+    {
+        return Mathf.Round(origin / gridSize) * gridSize + gridSize/2f;
+    }
+
     public static Vector3 snapToGrid(float gridSize, Vector3 origin)
     {
         return new Vector3(snapFloat(gridSize, origin.x), snapFloat(gridSize, origin.y), snapFloat(gridSize, origin.z));
+    }
+
+    public static Vector3 snapToGridCenter(float gridSize, Vector3 origin)
+    {
+        return new Vector3(snapFloatCenter(gridSize, origin.x), snapFloatCenter(gridSize, origin.y), snapFloatCenter(gridSize, origin.z));
     }
 }
