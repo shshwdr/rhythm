@@ -185,7 +185,7 @@ public class EnemyGenerator : MonoBehaviour
         foreach (var walkingEnemy in generatedEnemies)
         {
             addDrops(walkingEnemy, positionDir);
-            walkingEnemy.GetComponent<EnemyShooter>().isHorizontal = true;
+            //walkingEnemy.GetComponent<EnemyShooter>().isHorizontal = true;
         }
 
     }
@@ -209,9 +209,9 @@ public class EnemyGenerator : MonoBehaviour
         foreach (var walkingEnemy in generatedEnemies)
         {
             addDrops(walkingEnemy, positionDir);
-            walkingEnemy.GetComponent<EnemyShooter>().isHorizontal = false;
+            //walkingEnemy.GetComponent<EnemyShooter>().isHorizontal = false;
 
-            walkingEnemy.GetComponent<EnemyShooter>().shootTime = 0.5f;
+            //walkingEnemy.GetComponent<EnemyShooter>().shootTime = 0.5f;
         }
 
     }

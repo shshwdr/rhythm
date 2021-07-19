@@ -50,31 +50,61 @@ public class HPObjectController : MonoBehaviour
 
     }
 
-    bool checkIfCollide(Vector3 dir)
+    protected bool checkIfCollideWall(Vector3 dir)
     {
         int layerMask = LayerMask.GetMask("wall");
 
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer
-        if (Physics2D.Raycast(transform.position, dir, gridSize*0.9f, layerMask))
+        if (Physics2D.Raycast(transform.position, dir, gridSize * 0.9f, layerMask))
         {
-            Debug.DrawRay(transform.position, dir * 100*0.9f, Color.yellow);
-            Debug.Log("Did Hit");
+            //Debug.DrawRay(transform.position, dir * 100 * 0.9f, Color.yellow);
+            //Debug.Log("Did Hit");
             return true;
         }
         else
         {
-            Debug.DrawRay(transform.position, dir * 100 * 0.9f, Color.red);
-            Debug.Log("Did not Hit");
+            //Debug.DrawRay(transform.position, dir * 100 * 0.9f, Color.red);
+            //Debug.Log("Did not Hit");
             return false;
         }
     }
 
-    public virtual bool Move(Vector3 dir)
+    protected GameObject checkIfCollide(Vector3 dir)
+    {
+        var position = transform.position + dir;
+        var indexPosition = Utils.positionToGridIndexCenter2d(gridSize,position);
+        var go = MoveController.Instance. checkPositionItem(indexPosition);
+        return go;
+        //int layerMask = LayerMask.GetMask("wall");
+
+        //RaycastHit hit;
+        //// Does the ray intersect any objects excluding the player layer
+        //if (Physics2D.Raycast(transform.position, dir, gridSize*0.9f, layerMask))
+        //{
+        //    Debug.DrawRay(transform.position, dir * 100*0.9f, Color.yellow);
+        //    Debug.Log("Did Hit");
+        //    return true;
+        //}
+        //else
+        //{
+        //    Debug.DrawRay(transform.position, dir * 100 * 0.9f, Color.red);
+        //    Debug.Log("Did not Hit");
+        //    return false;
+        //}
+    }
+
+    public virtual Vector2 Move(Vector3 dir)
     {
         //do extra work for enemy
+        bool willCollideWall = checkIfCollideWall(dir);
         bool willCollider = checkIfCollide(dir);
-        if (!willCollider)
+        if (willCollideWall)
+        {
+            return Vector2.negativeInfinity;
+
+        }
+        else if (!willCollider)
         {
 
             //detect if collide
@@ -83,24 +113,31 @@ public class HPObjectController : MonoBehaviour
             {
 
                 rb.MovePosition(rb.position + (Vector2)dir * gridSize);
-               // transform.Translate(dir * gridSize);
+
+                // transform.Translate(dir * gridSize);
                 //transform.DOMove(transform.position + dir * gridSize, moveTime);//.SetEase(Ease.OutBack);
-            }else if(moveMode == 1)
+            }
+            else if(moveMode == 1)
             {
 
                 rb.MovePosition(rb.position + (Vector2)dir * gridSize);
-               // transform.Translate(dir * gridSize);
+
+                // transform.Translate(dir * gridSize);
                 //transform.DOJump(transform.position + dir * gridSize, 0.4f, 1, moveTime);
             }
-            return true;
+            return Utils.positionToGridIndexCenter2d(gridSize, (Vector3)rb.position + dir * gridSize);
+            //return true;
         }
         else
         {
-            dir = -dir;
-            return false;
+            return Vector2.negativeInfinity;
+            //dir = -dir;
+            //return false;
         }
 
     }
+
+
     virtual protected void Start()
     {
         hp = maxHp;

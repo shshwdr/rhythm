@@ -85,7 +85,59 @@ public class EnemyController : HPObjectController
             base.Update();
         }
     }
-    public void Move()
+
+
+    public override Vector2 Move(Vector3 dir)
+    {
+        if (GetComponent<EnemyAttack>())
+        {
+            GetComponent<EnemyAttack>().attack();
+        }
+
+        //do extra work for enemy
+        bool willColliderWall = checkIfCollideWall(dir);
+        GameObject willCollideObject = checkIfCollide(dir);
+        bool willCollideEnemy = willCollideObject&& willCollideObject.GetComponent<EnemyController>();
+        bool willCollidePlayer = willCollideObject&& willCollideObject.GetComponent<PlayerController>();
+        if (willCollidePlayer)
+        {
+            player.getDamage(1);
+            return Vector2.negativeInfinity;
+        }
+        else if (!willColliderWall && !willCollideEnemy)
+        {
+
+            //detect if collide
+            //transform.Translate(dir * gridSize);
+            if (moveMode == 0)
+            {
+
+                rb.MovePosition(rb.position + (Vector2)dir * gridSize);
+
+                // transform.Translate(dir * gridSize);
+                //transform.DOMove(transform.position + dir * gridSize, moveTime);//.SetEase(Ease.OutBack);
+            }
+            else if (moveMode == 1)
+            {
+
+                rb.MovePosition(rb.position + (Vector2)dir * gridSize);
+
+                // transform.Translate(dir * gridSize);
+                //transform.DOJump(transform.position + dir * gridSize, 0.4f, 1, moveTime);
+            }
+            return Utils.positionToGridIndexCenter2d(gridSize, (Vector3)rb.position + dir * gridSize);
+            //return true;
+        }
+        else
+        {
+            dir = -dir;
+            return Vector2.negativeInfinity;
+            //return false;
+        }
+
+    }
+
+    public Vector2 Move()
     {
         currentMoveStep++;
         if (currentMoveStep >= moveStep)
@@ -97,17 +149,20 @@ public class EnemyController : HPObjectController
                 movingDir = Utils.chaseDir2d(transform.position, player.transform.position);
             }
 
-            bool succeed = base.Move(movingDir.normalized);
-            if (!succeed)
+            var res  = Move(movingDir.normalized);
+            if (res.Equals(Vector2.negativeInfinity))
             {
                 movingDir = -movingDir;
             }
+            return res;
             //transform.Translate(movingDir.normalized * GameMaster.Instance.gridSize);
         }
         else
         {
             Debug.Log("test");
         }
+
+        return Vector2.negativeInfinity;
 
     }
     private void LateUpdate()
@@ -145,14 +200,14 @@ public class EnemyController : HPObjectController
         //}
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        var player = collision.GetComponent<PlayerController>();
-        if (player)
-        {
-            player.getDamage(1);
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    var player = collision.GetComponent<PlayerController>();
+    //    if (player)
+    //    {
+    //        player.getDamage(1);
+    //    }
+    //}
 
 
     protected override void Die()
@@ -168,6 +223,7 @@ public class EnemyController : HPObjectController
             go.GetComponent<PoolObject>().fetch();
             go.transform.position = transform.position;
         }
+        MoveController.Instance.removeEnemy(this);
         GetComponent<PoolObject>().returnBack();
 
         List<string> explosions = new List<string>() { "explosion", "explosion1", "explosion2", "explosion3", "explosion4", };

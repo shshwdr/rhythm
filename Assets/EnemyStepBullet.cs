@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStepBullet : StepBullet
+public class EnemyStepBullet : StepBullet
 {
     public int damage = 1;
     Vector3 dir;
@@ -70,7 +70,7 @@ public class PlayerStepBullet : StepBullet
     //        rb.MovePosition(rb.position + (Vector2)dir * gridSize);
     //       // transform.Translate(dir * gridSize);
     //            //transform.DOMove(transform.position + dir * gridSize, moveTime);//.SetEase(Ease.OutBack);
-            
+
     //        return true;
     //    }
     //    else
@@ -85,28 +85,28 @@ public class PlayerStepBullet : StepBullet
     {
 
         GameObject willCollideObject = checkIfCollide(dir);
-        bool willCollideEnemy = willCollideObject && willCollideObject.GetComponent<EnemyController>();
+        bool willCollideEnemy = willCollideObject && willCollideObject.GetComponent<PlayerController>();
         if (willCollideEnemy)
         {
-            willCollideObject.GetComponent<EnemyController>().getDamage(damage);
+            willCollideObject.GetComponent<PlayerController>().getDamage(damage);
             returnBack();
         }
     }
     public override Vector2 Move()
     {
+        
         bool willCollider = checkIfCollideWall(dir);
 
         GameObject willCollideObject = checkIfCollide(dir);
-        bool willCollideEnemy = willCollideObject && willCollideObject.GetComponent<EnemyController>();
+        bool willCollideEnemy = willCollideObject && willCollideObject.GetComponent<PlayerController>();
         if (willCollideEnemy)
         {
-            willCollideObject.GetComponent<EnemyController>().getDamage(damage);
+            willCollideObject.GetComponent<PlayerController>().getDamage(damage);
             returnBack();
             return Vector2.negativeInfinity;
         }
-        else if(!willCollider)
+        else if (!willCollider)
         {
-
             var previousIndex = Utils.positionToGridIndexCenter2d(gridSize, (Vector3)rb.position);
             var newIndex = Utils.positionToGridIndexCenter2d(gridSize, (Vector3)rb.position + dir * gridSize);
             GetComponentInChildren<BulletSpriteMove>().Move(rb.position, (Vector3)rb.position + dir * gridSize);

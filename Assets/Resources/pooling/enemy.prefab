@@ -205,11 +205,15 @@ MonoBehaviour:
   elementType: 
   hideWhenFarAway: {fileID: 0}
   isImmortal: 0
+  moveMode: 0
   facingRight: 1
   movingDir: {x: 0, y: 0}
   ignoreTimeControl: 0
   coin: {fileID: 2421216365258476753}
   ability: {fileID: 2311366000217010646}
+  chasePlayer: 0
+  moveStep: 1
+  canMoveDiagnal: 0
 --- !u!114 &2009230649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,11 +253,15 @@ MonoBehaviour:
   elementType: 
   hideWhenFarAway: {fileID: 0}
   isImmortal: 0
+  moveMode: 0
   facingRight: 1
   movingDir: {x: 0, y: 0}
   ignoreTimeControl: 0
   coin: {fileID: 0}
   ability: {fileID: 0}
+  chasePlayer: 0
+  moveStep: 1
+  canMoveDiagnal: 0
   finishChasingDistance: 4.5
   finishDashingDistance: 5
   prepareTime: 5
@@ -306,6 +314,7 @@ GameObject:
   - component: {fileID: 3350263615430409863}
   - component: {fileID: 3907487814232724076}
   - component: {fileID: 6328185389864481063}
+  - component: {fileID: 1564434097037352166}
   m_Layer: 6
   m_Name: Sprites
   m_TagString: Untagged
@@ -397,6 +406,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1564434097037352166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3834173111293464314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c16fa2ba5450ab24795e367e0bc62564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2009230654
 MonoBehaviour:
   m_ObjectHideFlags: 0

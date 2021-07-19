@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7322732971357189593}
   - component: {fileID: 7322732971357189592}
   - component: {fileID: 6772994417694166046}
-  - component: {fileID: 2822928968853718340}
+  - component: {fileID: -1494173714896827128}
   m_Layer: 0
   m_Name: enemyBullet
   m_TagString: Untagged
@@ -71,7 +71,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2822928968853718340
+--- !u!114 &-1494173714896827128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,10 +80,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7322732971357189598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df3f506ac60136c428ceeb13a88f8377, type: 3}
+  m_Script: {fileID: 11500000, guid: aac106c9c3d3445448961cda74f78b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  returnTime: 5
+  returnTime: -1
   cacheCount: 50
   damage: 1
   speed: 20
@@ -97,6 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7322732971974385047}
   - component: {fileID: 7322732971974385044}
+  - component: {fileID: 1066495298922647817}
   m_Layer: 0
   m_Name: renderer
   m_TagString: Untagged
@@ -169,3 +170,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1066495298922647817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7322732971974385045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b1194608f0b6747aa6dc84fbc49f9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

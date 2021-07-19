@@ -22,14 +22,17 @@ public class PlayerController : HPObjectController
         animator = GetComponentInChildren<Animator>();
         animator.SetFloat("speed", 1);
         originalPosition = transform.position;
+        MoveController.Instance.addPlayer();
     }
 
 
-    public override bool Move(Vector3 dir)
+    public override Vector2 Move(Vector3 dir)
     {
-        base.Move(dir);
+
+        var res  = base.Move(dir);
+        MoveController.Instance.updatePlayer(res);
         movement = Vector2.zero;
-        return true;
+        return res;
     }
 
     // Update is called once per frame
