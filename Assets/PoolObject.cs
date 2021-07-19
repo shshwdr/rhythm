@@ -25,7 +25,7 @@ public class PoolObject : MonoBehaviour
 
     }
 
-    public void returnBack(){
+    public virtual void returnBack(){
 
         gameObject.SetActive(false);
     }

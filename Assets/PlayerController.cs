@@ -24,6 +24,7 @@ public class PlayerController : HPObjectController
         originalPosition = transform.position;
     }
 
+
     public override bool Move(Vector3 dir)
     {
         base.Move(dir);

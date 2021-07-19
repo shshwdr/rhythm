@@ -13,6 +13,12 @@ public class EnemyController : HPObjectController
     protected PlayerController player;
     public GameObject coin;
     public GameObject ability;
+
+    public bool chasePlayer;
+    public int moveStep = 1;
+    int currentMoveStep = 0;
+    public bool canMoveDiagnal;
+    bool canAttack;
     
 
 
@@ -51,16 +57,18 @@ public class EnemyController : HPObjectController
     protected override void Start()
     {
         base.Start();
+
+        player = FindObjectOfType<PlayerController>();
         if (ignoreTimeControl)
         {
-            player = FindObjectOfType<PlayerController>();
             originalPosition = transform.position;
             EventPool.OptIn(EventPool.stopGameEvent, restartGame);
         }
         animator = GetComponentInChildren<Animator>();
-        EventPool.OptIn("Beat", Move);
+        //EventPool.OptIn("Beat", Move);
         //animator.SetFloat("speed", 1);
         moveMode = 1;
+        MoveController.Instance. addEnemy(this);
     }
 
     void restartGame()
@@ -77,14 +85,30 @@ public class EnemyController : HPObjectController
             base.Update();
         }
     }
-    void Move()
+    public void Move()
     {
-        bool succeed  = base.Move(movingDir.normalized);
-        if (!succeed)
+        currentMoveStep++;
+        if (currentMoveStep >= moveStep)
         {
-            movingDir = -movingDir;
+            currentMoveStep = 0;
+
+            if (chasePlayer)
+            {
+                movingDir = Utils.chaseDir2d(transform.position, player.transform.position);
+            }
+
+            bool succeed = base.Move(movingDir.normalized);
+            if (!succeed)
+            {
+                movingDir = -movingDir;
+            }
+            //transform.Translate(movingDir.normalized * GameMaster.Instance.gridSize);
         }
-         //transform.Translate(movingDir.normalized * GameMaster.Instance.gridSize);
+        else
+        {
+            Debug.Log("test");
+        }
+
     }
     private void LateUpdate()
     {

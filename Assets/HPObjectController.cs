@@ -82,12 +82,14 @@ public class HPObjectController : MonoBehaviour
             if(moveMode == 0)
             {
 
-                transform.Translate(dir * gridSize);
+                rb.MovePosition(rb.position + (Vector2)dir * gridSize);
+               // transform.Translate(dir * gridSize);
                 //transform.DOMove(transform.position + dir * gridSize, moveTime);//.SetEase(Ease.OutBack);
             }else if(moveMode == 1)
             {
 
-                transform.Translate(dir * gridSize);
+                rb.MovePosition(rb.position + (Vector2)dir * gridSize);
+               // transform.Translate(dir * gridSize);
                 //transform.DOJump(transform.position + dir * gridSize, 0.4f, 1, moveTime);
             }
             return true;

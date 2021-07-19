@@ -102,8 +102,8 @@ public class AutoShoot : MonoBehaviour
     protected void generateNormalBullet(Vector3 dir, Vector3 startOffset = new Vector3())
     {
         var bullet = ObjectPooler.Instance.GetPooledObject("playerBullet");
-        bullet.GetComponent<PlayerBullet>().fetch();
-        bullet.GetComponent<PlayerBullet>().Init(transform.position + startOffset, dir, damage);
+        bullet.GetComponent<PoolObject>().fetch();
+        bullet.GetComponent<PlayerStepBullet>().Init(transform.position + startOffset, dir, damage);
     }
     protected void generateHomingBullet(Vector3 startOffset = new Vector3())
     {

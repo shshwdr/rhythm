@@ -317,6 +317,7 @@ public class GameMaster : Singleton<GameMaster>
                 {
 
                     hasBeatInput = true;
+                    //MoveController.Instance.Move();
                     player.Move(new Vector2(-1, 0));
 
                     //Array.Clear(commandType, 0, commandType.Length);
@@ -325,6 +326,7 @@ public class GameMaster : Singleton<GameMaster>
                 {
 
                     hasBeatInput = true;
+                    //MoveController.Instance.Move();
                     player.Move(new Vector2(1, 0));
 
                     //Array.Clear(commandType, 0, commandType.Length);
@@ -333,6 +335,7 @@ public class GameMaster : Singleton<GameMaster>
                 {
 
                     hasBeatInput = true;
+                    //MoveController.Instance.Move();
                     player.Move(new Vector2(0, 1));
 
                     //Array.Clear(commandType, 0, commandType.Length);
@@ -341,6 +344,7 @@ public class GameMaster : Singleton<GameMaster>
                 {
 
                     hasBeatInput = true;
+                    //MoveController.Instance.Move();
                     player.Move(new Vector2(0, -1));
 
                     // Array.Clear(commandType, 0, commandType.Length);
