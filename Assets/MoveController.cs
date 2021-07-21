@@ -64,9 +64,9 @@ public class MoveController : Singleton<MoveController>
         //move player
     }
 
-    public void addPlayer()
+    public void addPlayer(PlayerController p)
     {
-
+        player = p;
         Vector2 position = Utils.positionToGridIndexCenter2d(gridSize, player.transform.position);
         setPosition(position, player.gameObject);
     }

@@ -34,13 +34,13 @@ public class EnemyStepBullet : StepBullet
         if (Physics2D.Raycast(transform.position, dir, gridSize * 0.9f, layerMask))
         {
             Debug.DrawRay(transform.position, dir * 100 * 0.9f, Color.yellow);
-            Debug.Log("Did Hit");
+           // Debug.Log("Did Hit");
             return true;
         }
         else
         {
             Debug.DrawRay(transform.position, dir * 100 * 0.9f, Color.red);
-            Debug.Log("Did not Hit");
+            //Debug.Log("Did not Hit");
             return false;
         }
     }

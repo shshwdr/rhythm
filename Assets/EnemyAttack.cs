@@ -8,6 +8,7 @@ public class EnemyAttack:MonoBehaviour
 
     protected int readyRound = 0;
     int currentReadyRound = 0;
+    protected float gridSize;
 
     public virtual bool isReadyToAttack()
     {
@@ -22,5 +23,9 @@ public class EnemyAttack:MonoBehaviour
     public virtual void attack()
     {
 
+    }
+    private void Start()
+    {
+        gridSize = GameMaster.Instance.gridSize;
     }
 }

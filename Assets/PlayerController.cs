@@ -22,7 +22,7 @@ public class PlayerController : HPObjectController
         animator = GetComponentInChildren<Animator>();
         animator.SetFloat("speed", 1);
         originalPosition = transform.position;
-        MoveController.Instance.addPlayer();
+        MoveController.Instance.addPlayer(this);
     }
 
 

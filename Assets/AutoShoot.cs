@@ -11,6 +11,7 @@ public class AutoShoot : MonoBehaviour
     protected int damage = 1;
     float beatShootTime;
     bool isShooting = false;
+    float gridSize;
     public List<int> levelToDamage = new List<int>()
     {
         1,2,3,4,5
@@ -43,6 +44,7 @@ public class AutoShoot : MonoBehaviour
         beatShootTime = 60f / GameMaster.Instance.beatsPerMinute * 4;
         resetGame();
         EventPool.OptIn(EventPool.stopGameEvent, resetGame);
+        gridSize = GameMaster.Instance.gridSize;
     }
 
     public void increaseLevel(bool forever = false)
@@ -103,7 +105,7 @@ public class AutoShoot : MonoBehaviour
     {
         var bullet = ObjectPooler.Instance.GetPooledObject("playerBullet");
         bullet.GetComponent<PoolObject>().fetch();
-        bullet.GetComponent<PlayerStepBullet>().Init(transform.position + startOffset, dir, damage);
+        bullet.GetComponent<PlayerStepBullet>().Init(transform.position + startOffset + dir*gridSize, dir, damage);
     }
     protected void generateHomingBullet(Vector3 startOffset = new Vector3())
     {

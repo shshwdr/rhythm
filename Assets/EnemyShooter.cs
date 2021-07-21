@@ -32,6 +32,6 @@ public class EnemyShooter : EnemyAttack
     }
     protected virtual void Shoot()
     {
-        generateNormalBullet(dir, new Vector3(0, 0, 0));
+        generateNormalBullet(dir, dir*gridSize);
     }
 }

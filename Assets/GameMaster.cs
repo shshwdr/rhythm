@@ -18,7 +18,8 @@ public class GameMaster : Singleton<GameMaster>
     public AudioClip drumRight;
     public AudioClip drumDown;
     public AudioClip drumLeft;
-    AudioSource audioSource;
+    AudioSource audioSourceSFX;
+    AudioSource[] audioSources;
 
     [Header("Public references")]
     public TeamController teamController;
@@ -91,7 +92,8 @@ public class GameMaster : Singleton<GameMaster>
         teamController.secondsToBeats = (int)(invokeTime * 4);
 
         commandType = new int[4] { 0, 0, 0, 0 };
-        audioSource = GetComponent<AudioSource>();
+        audioSourceSFX = GetComponent<AudioSource>();
+        audioSources = GetComponentsInChildren<AudioSource>();
         player = FindObjectOfType<PlayerController>();
         player.gridSize = gridSize;
         //audioSources = GetComponents<AudioSource>();
@@ -118,9 +120,16 @@ public class GameMaster : Singleton<GameMaster>
         InvokeRepeating("AllowBeat", 0f, invokeTime);
 
         yield return new WaitForSeconds(errorMarginTime / 2f);
-        GameManager.Instance.GetComponent<AudioSource>().Play();
+        audioSources[1].Play();
+        audioSources[2].Play();
+        //GameManager.Instance.GetComponent<AudioSource>().Play();
     }
-
+    public void addAudioSource()
+    {
+        Debug.Log("audio sources time " + audioSources[1].time + " " + audioSources[2].time);
+        audioSources[3].time = audioSources[2].time;
+        audioSources[3].Play();
+    }
 
     void Update()
     {
@@ -129,7 +138,7 @@ public class GameMaster : Singleton<GameMaster>
         {
             allowedToBeat = false;
 
-            Debug.Log("not allow!");
+            //Debug.Log("not allow!");
             if (commandType[3] != 0)
             {
                 bool commandMatched = SetInput(commandType);
@@ -160,7 +169,7 @@ public class GameMaster : Singleton<GameMaster>
 
         if (!allowedToBeat && Input.anyKeyDown)
         {                     //mistiming beat with master beat
-            audioSource.PlayOneShot(beatMissSigh);
+            audioSourceSFX.PlayOneShot(beatMissSigh);
             clearCommand();
             commandCount = 0;
         }
@@ -222,7 +231,7 @@ public class GameMaster : Singleton<GameMaster>
         //    teamController.resetSpritesToIdle();
 
         allowedToBeat = true;
-        Debug.Log("allow!");
+        //Debug.Log("allow!");
         inactiveBeatCount--;
         if (hasBeatInput)
         {
@@ -235,12 +244,12 @@ public class GameMaster : Singleton<GameMaster>
         EventPool.Trigger("Beat");
         if ((inactiveBeatCount) >= 0)
         {
-            audioSource.PlayOneShot(commandMutedBeat);
+            audioSourceSFX.PlayOneShot(commandMutedBeat);
         }
         else
         {
 
-            audioSource.PlayOneShot(masterBeat);
+            audioSourceSFX.PlayOneShot(masterBeat);
         }
     }
 
@@ -255,7 +264,13 @@ public class GameMaster : Singleton<GameMaster>
         if (allowedToBeat && !hasBeatInput)
         {
 
-            if (inactiveBeatCount < 0/* && Input.GetKey(KeyCode.Space)*/)
+            if (!Input.GetKey(KeyCode.Space) && (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow)))
+            {
+                clearCommand();
+                commandCount = 0;
+            }
+
+            if (inactiveBeatCount < 0 && Input.GetKey(KeyCode.Space))
             {
                 for (int i = 0; i < 4; i++)
                 {
@@ -267,7 +282,7 @@ public class GameMaster : Singleton<GameMaster>
                             Debug.Log("left");
                             commandType[i] = 1;
                             hasBeatInput = true;
-                            audioSource.PlayOneShot(drumLeft);
+                            audioSourceSFX.PlayOneShot(drumLeft);
                             currentDrumSprite = drumLeftSprite;
                             currentDrumSprite.color = flashColor;
                             EventPool.Trigger("BeatDown", i, 1);
@@ -278,7 +293,7 @@ public class GameMaster : Singleton<GameMaster>
                         {
                             commandType[i] = 2;
                             hasBeatInput = true;
-                            audioSource.PlayOneShot(drumRight);
+                            audioSourceSFX.PlayOneShot(drumRight);
                             currentDrumSprite = drumRightSprite;
                             currentDrumSprite.color = flashColor;
                             EventPool.Trigger("BeatDown", i, 2);
@@ -289,7 +304,7 @@ public class GameMaster : Singleton<GameMaster>
                         {
                             commandType[i] = 3;
                             hasBeatInput = true;
-                            audioSource.PlayOneShot(drumTop);
+                            audioSourceSFX.PlayOneShot(drumTop);
                             currentDrumSprite = drumTopSprite;
                             currentDrumSprite.color = flashColor;
                             EventPool.Trigger("BeatDown", i, 3);
@@ -300,7 +315,7 @@ public class GameMaster : Singleton<GameMaster>
                         {
                             commandType[i] = 4;
                             hasBeatInput = true;
-                            audioSource.PlayOneShot(drumDown);
+                            audioSourceSFX.PlayOneShot(drumDown);
                             currentDrumSprite = drumBottomSprite;
                             currentDrumSprite.color = flashColor;
                             EventPool.Trigger("BeatDown", i, 4);

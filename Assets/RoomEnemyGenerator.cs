@@ -6,6 +6,13 @@ public class RoomEnemyGenerator : MonoBehaviour
 {
 
     Dictionary<System.Tuple<int, int>, int> roomAvailable;
+
+    EnemyController[] enemies;
+
+    Transform respawnPoint;
+    bool isCleared = false;
+    bool isActivated = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +26,38 @@ public class RoomEnemyGenerator : MonoBehaviour
         //generateHorizontalMovingEnemy();
         //generateHorizontalMovingEnemy();
         //generateHorizontalMovingEnemy();
+        enemies = GetComponentsInChildren<EnemyController>();
+
+        foreach (var enemy in enemies)
+        {
+            enemy.room = this;
+        }
+        respawnPoint = gameObject.transform.Find("respawnPoint");
+    }
+
+    public void enemyDie(EnemyController e)
+    {
+        foreach (var enemy in enemies)
+        {
+            
+        }
+    }
+
+    public void activateRoom()
+    {
+        if (isActivated)
+        {
+            return;
+        }
+        foreach(var enemy in enemies)
+        {
+            enemy.activate();
+        }
+        if (isCleared)
+        {
+            return;
+        }
+        GameManager.Instance.currentRoom = this;
     }
 
     // Update is called once per frame

@@ -19,7 +19,10 @@ public class EnemyController : HPObjectController
     int currentMoveStep = 0;
     public bool canMoveDiagnal;
     bool canAttack;
-    
+
+    public bool isActive = false;
+
+    public RoomEnemyGenerator room;
 
 
     Vector3 originalPosition;
@@ -53,6 +56,13 @@ public class EnemyController : HPObjectController
             }
         }
     }
+
+    public void activate()
+    {
+        isActive = true;
+    }
+
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -69,6 +79,7 @@ public class EnemyController : HPObjectController
         //animator.SetFloat("speed", 1);
         moveMode = 1;
         MoveController.Instance. addEnemy(this);
+        
     }
 
     void restartGame()
@@ -139,6 +150,10 @@ public class EnemyController : HPObjectController
 
     public Vector2 Move()
     {
+        if (!isActive)
+        {
+            return Vector2.negativeInfinity;
+        }
         currentMoveStep++;
         if (currentMoveStep >= moveStep)
         {
@@ -146,6 +161,7 @@ public class EnemyController : HPObjectController
 
             if (chasePlayer)
             {
+                movingDir = Vector3.zero;
                 movingDir = Utils.chaseDir2d(transform.position, player.transform.position);
             }
 
@@ -159,7 +175,7 @@ public class EnemyController : HPObjectController
         }
         else
         {
-            Debug.Log("test");
+           // Debug.Log("test");
         }
 
         return Vector2.negativeInfinity;
@@ -231,5 +247,6 @@ public class EnemyController : HPObjectController
         GameObject exp = ObjectPooler.Instance.GetPooledObject(selectedExplosion);
         exp.GetComponent<PoolObject>().fetch();
         exp.transform.position = transform.position;
+        room.enemyDie(this);
     }
 }

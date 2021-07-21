@@ -7,6 +7,8 @@ public class GameManager : Singleton<GameManager>
 {
     public bool isInGame = false;
     PlayerController player;
+
+    public RoomEnemyGenerator currentRoom;
     // Start is called before the first frame update
     void Start()
     {
