@@ -277,6 +277,11 @@ public class GameMaster : Singleton<GameMaster>
 
     void GetDrumInputs()
     {
+        if (player.isConversation)
+        {
+            return;
+        }
+
         if (allowedToBeat && !hasBeatInput)
         {
 

@@ -25,9 +25,9 @@ public class EnemyShooter : EnemyAttack
         bullet.GetComponent<EnemyStepBullet>().Init(transform.position + startOffset, dir, damage);
     }
 
-    public override void attack()
+
+    protected override void doAttack()
     {
-        base.attack();
         Shoot();
     }
     protected virtual void Shoot()

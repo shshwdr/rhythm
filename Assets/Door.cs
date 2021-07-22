@@ -14,8 +14,11 @@ public class Door : EventActivator
     }
     void clearRoom(string id)
     {
-        EventPool.OptOut<string>("clearRoom", clearRoom);
-        gameObject.SetActive(false);
+        if(id == roomId)
+        {
+            EventPool.OptOut<string>("clearRoom", clearRoom);
+            gameObject.SetActive(false);
+        }
     }
     // Update is called once per frame
     void Update()

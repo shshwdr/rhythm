@@ -53,14 +53,20 @@ public class OneInstructionRow : MonoBehaviour
     public void Init(Instruction instru)
     {
         instructionList = instru.instructionStep.ToArray();
-        for(int i = 0;i< instructionList.Length;i++)
-        {
-            instructions[i].Init(instructionList[i]);
-        }
+        Init(instructionList);
         nameLabel.text = instru.name;
         if (!instru.isUnlocked)
         {
             gameObject.SetActive(false);
+        }
+    }
+
+    public void Init(int[] list)
+    {
+        instructionList = list;
+        for (int i = 0; i < instructionList.Length; i++)
+        {
+            instructions[i].Init(instructionList[i]);
         }
     }
 

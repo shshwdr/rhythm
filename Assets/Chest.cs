@@ -8,10 +8,17 @@ public class Chest : MonoBehaviour
     public int instructionId = -1;
     TeamController teamController;
     public List<int> openInstruction;
+    bool opened = false;
+
+    public List<int> getKey()
+    {
+        return openInstruction;
+    }
     // Start is called before the first frame update
     void Start()
     {
         teamController = FindObjectOfType<TeamController>();
+        GetComponentInChildren<OneInstructionRow>().Init(openInstruction.ToArray());
     }
 
     // Update is called once per frame
@@ -20,12 +27,40 @@ public class Chest : MonoBehaviour
         
     }
 
-    public void openChest()
+    public void showPopup(int i)
     {
-        if (instructionId >= 0)
+        string popupText = "";
+        switch (i)
         {
-            teamController.getInstruction(instructionId);
+            case 0:
+                popupText = "Too Far Away";
+                break;
         }
-        Destroy(gameObject);
+        GetComponentInChildren<ShowLocalPopup>().show(popupText);
+    }
+
+    public bool tryOpenChest(Vector3 openPosition)
+    {
+        if (opened)
+        {
+            return false;
+        }
+        if (Utils.nextToPositionInGrid(GameMaster.Instance.gridSize, openPosition, transform.position))
+        {
+
+            if (instructionId >= 0)
+            {
+                teamController.getInstruction(instructionId);
+            }
+            Destroy(gameObject);
+            return true;
+        }
+        else
+        {
+            showPopup(0);
+            return false;
+        }
+
+
     }
 }

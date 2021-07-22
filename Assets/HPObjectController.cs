@@ -52,7 +52,7 @@ public class HPObjectController : MonoBehaviour
 
     protected bool checkIfCollideWall(Vector3 dir)
     {
-        int layerMask = LayerMask.GetMask("wall");
+        int layerMask = LayerMask.GetMask("wall") | LayerMask.GetMask("chest");
 
         RaycastHit hit;
         // Does the ray intersect any objects excluding the player layer

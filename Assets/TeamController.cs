@@ -124,7 +124,23 @@ public class TeamController : MonoBehaviour
             }
         }
 
-        //Physics2D.BoxCast(transform.position,GameMaster.Instance.gridSize,)
+
+        int layerMask = LayerMask.GetMask("chest");
+
+        var chest = Physics2D.OverlapBox(transform.position, new Vector2(GameMaster.Instance.gridSize*6, GameMaster.Instance.gridSize*6), 0, layerMask);
+
+        if (chest)
+        {
+            var key = chest.GetComponent<Chest>().getKey();
+            if(ArrayCompare(commandType, key.ToArray()))
+            {
+                bool opened = chest.GetComponent<Chest>().tryOpenChest(transform.position);
+                if (opened)
+                {
+                    found = true;
+                }
+            }
+        }
 
         if (!found)
         {

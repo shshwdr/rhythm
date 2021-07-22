@@ -10,7 +10,7 @@ public class PlayerController : HPObjectController
     public float moveTime = 1;
     [HideInInspector]
     public float walkedDistance = 0;
-    bool isConversation;
+    public bool isConversation;
     public float gridSize = 0.15f;
 
     Vector3 originalPosition;

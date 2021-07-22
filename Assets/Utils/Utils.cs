@@ -62,6 +62,17 @@ public class Utils : MonoBehaviour
         return new Vector2(floatToGridIndexCenter(gridSize, origin.x), floatToGridIndexCenter(gridSize, origin.y));
     }
 
+    public static bool nextToPositionInGrid(float gridSize, Vector3 p1, Vector3 p2)
+    {
+        var positionIndex1 = positionToGridIndexCenter2d(gridSize, p1);
+        var positionIndex2 = positionToGridIndexCenter2d(gridSize, p2);
+        if((positionIndex1 - positionIndex2).magnitude <= 1.1f)
+        {
+            return true;
+        }
+        return false;
+    }
+
     public static Vector2 chaseDir2d(Vector3 chaser, Vector3 chasee)
     {
         var diff = chasee - chaser;

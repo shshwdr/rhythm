@@ -24,6 +24,7 @@ public class PlayerStepBullet : StepBullet
         gridSize = GameMaster.Instance.gridSize;
 
         MoveController.Instance.addBullet(this);
+        checkStartAttack();
     }
     bool checkIfCollideWall(Vector3 dir)
     {
@@ -81,6 +82,18 @@ public class PlayerStepBullet : StepBullet
 
     //}
 
+
+    public  void checkStartAttack()
+    {
+
+        GameObject willCollideObject = checkIfCollide(Vector3.zero);
+        bool willCollideEnemy = willCollideObject && willCollideObject.GetComponent<EnemyController>();
+        if (willCollideEnemy)
+        {
+            willCollideObject.GetComponent<EnemyController>().getDamage(damage);
+            returnBack();
+        }
+    }
     public override void checkAttack()
     {
 
