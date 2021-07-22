@@ -1,6 +1,7 @@
 using Pool;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class OneInstructionRow : MonoBehaviour
@@ -8,6 +9,7 @@ public class OneInstructionRow : MonoBehaviour
     OneInstruction[] instructions;
     int[] instructionList;
     bool isDisabled = false;
+    public TMP_Text nameLabel;
     // Start is called before the first frame update
     void Awake()
     {
@@ -48,12 +50,17 @@ public class OneInstructionRow : MonoBehaviour
             ins.beatDisable();
         }
     }
-    public void Init(int[] list)
+    public void Init(Instruction instru)
     {
-        instructionList = list;
+        instructionList = instru.instructionStep.ToArray();
         for(int i = 0;i< instructionList.Length;i++)
         {
             instructions[i].Init(instructionList[i]);
+        }
+        nameLabel.text = instru.name;
+        if (!instru.isUnlocked)
+        {
+            gameObject.SetActive(false);
         }
     }
 

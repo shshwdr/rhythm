@@ -3,7 +3,21 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine;
+using System;
 
+[Serializable]
+public class Instruction
+{
+    public List<int> instructionStep;
+    public bool isUnlocked;
+    public string name;
+    public Instruction(List<int> steps,bool unlock,string n)
+    {
+        instructionStep = steps;
+        isUnlocked = unlock;
+        name = n;
+    }
+}
 public class TeamController : MonoBehaviour
 {
 
@@ -15,12 +29,13 @@ public class TeamController : MonoBehaviour
 
     public Transform instructionsUI;
 
-    public List<List<int>> instructions = new List<List<int>>()
+    public List<Instruction> instructions = new List<Instruction>()
     {
-        new List<int>(){3,4,0,0},
-        new List<int>(){1,2,0,0},
+        //new Instruction new List<int>(){3,4,0,0},
+        //new List<int>(){1,2,0,0},
 
     };
+
 
     [HideInInspector] public int secondsToBeats;
 
@@ -33,6 +48,8 @@ public class TeamController : MonoBehaviour
     public Image unmatchedCommandSprite;
     float spriteFlashSpeed = 0.5f;
     Color flashColor = new Color(255f, 255f, 255f, 1);
+
+    List<Transform> instructionChildren = new List<Transform>();
 
     void Start()
     {
@@ -50,8 +67,23 @@ public class TeamController : MonoBehaviour
         for(int i = 0;i< instructionsUI.childCount-1;i++) 
         {
             Transform child = instructionsUI.GetChild(i);
-            child.GetComponent<OneInstructionRow>().Init(instructions[i].ToArray());
+            child.GetComponent<OneInstructionRow>().Init(instructions[i]);
+            instructionChildren.Add(child);
         }
+    }
+
+    public void getInstruction(int i)
+    {
+        Transform child = instructionChildren[i];
+        if (child.gameObject.activeInHierarchy)
+        {
+            Debug.Log("instruction " + i + " was actived");
+            return;
+        }
+        instructions[i].isUnlocked = true;
+        child.gameObject.SetActive(true);
+
+        Debug.Log("instruction " + i + " active!");
     }
 
     private void Update()
@@ -61,42 +93,46 @@ public class TeamController : MonoBehaviour
     }
 
 
+    void doAttack(int i)
+    {
+        switch (i)
+        {
+            case 0:
+                Debug.Log("up");
+                GetComponent<ForwardAutoShoot>().startShoot();
+                break;
+            case 1:
+                Debug.Log("side");
+                GetComponent<SideAutoShoot>().startShoot();
+                break;
+        }
+    }
 
     public bool GetInput(int[] commandType)
     {
-
-        //walk
-        if (ArrayCompare(commandType, new int[] { 3,4 }))
+        bool found = false;
+        for(int i = 0; i < instructions.Count; i++)
         {
-            Debug.Log("up");
-            GetComponent<ForwardAutoShoot>().startShoot();
-            //Vector2 currentPosition = new Vector2(transform.position.x, transform.position.y);
-            //thisRigidbody.DOMove(currentPosition + (Vector2.left * moveDistance), secondsToBeats, false);
-
-            //sprite1Animator.SetBool("Walking", true);
-            //sprite2Animator.SetBool("Walking", true);
-
-            return true;
+            if (instructions[i].isUnlocked)
+            {
+                var expectedCommand = instructions[i].instructionStep.ToArray();
+                if (ArrayCompare(commandType, expectedCommand))
+                {
+                    doAttack(i);
+                    found = true;
+                }
+            }
         }
-        //jump
-        else if (ArrayCompare(commandType, new int[] { 1, 2 }))
-        {
-            Debug.Log("side");
-            GetComponent<SideAutoShoot>().startShoot();
-            //Vector2 currentPosition = new Vector2(transform.position.x, transform.position.y);
-            //thisRigidbody.DOJump(currentPosition + (Vector2.up * jumpHeight), 0.5f, 0, secondsToBeats, false);
 
-            //sprite1Animator.SetBool("Jumping", true);
-            //sprite2Animator.SetBool("Jumping", true);
+        //Physics2D.BoxCast(transform.position,GameMaster.Instance.gridSize,)
 
-            return true;
-        }
-        else
+        if (!found)
         {
             unmatchedCommand.Play();
             unmatchedCommandSprite.color = flashColor;
             return false;
         }
+        return true;
     }
 
     bool ArrayCompare(int[] array1, int[] array2)
@@ -105,7 +141,7 @@ public class TeamController : MonoBehaviour
         //    return false;
         for (var i = 0; i < array2.Length; i++)
         {
-            if (array1[i] != array2[i])
+            if (array1[i] != array2[i] && array2[i]!=0)
                 return false;
         }
         return true;

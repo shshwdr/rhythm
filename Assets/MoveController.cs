@@ -20,6 +20,7 @@ public class MoveController : Singleton<MoveController>
     {
         enemies = new List<EnemyController>();
         playerBullets = new List<StepBullet>();
+        gridSize = GameMaster.Instance.gridSize;
     }
     private void Start()
     {

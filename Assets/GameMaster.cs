@@ -124,11 +124,27 @@ public class GameMaster : Singleton<GameMaster>
         audioSources[2].Play();
         //GameManager.Instance.GetComponent<AudioSource>().Play();
     }
-    public void addAudioSource()
+    public void addAudioSource(int i)
     {
         Debug.Log("audio sources time " + audioSources[1].time + " " + audioSources[2].time);
-        audioSources[3].time = audioSources[2].time;
-        audioSources[3].Play();
+        audioSources[i].time = audioSources[2].time;
+        audioSources[i].Play();
+        audioSources[i].volume = 0;
+        audioSources[i].DOKill();
+        DOTween.To(() => audioSources[i].volume, x => audioSources[i].volume = x, 1, 0.5f);
+        // Tween a Vector3 called myVector to 3,4,8 in 1 second
+        //DOTween.To(() => myVector, x => myVector = x, new Vector3(3, 4, 8), 1);
+        // Tween a float called myFloat to 52 in 1 second
+        //DOTween.To(() => myFloat, x => myFloat = x, 52, 1);
+    }
+
+    public void removeAudioSource(int i)
+    {
+        audioSources[i].Stop();
+
+        audioSources[i].volume = 1;
+        audioSources[i].DOKill();
+        DOTween.To(() => audioSources[i].volume, x => audioSources[i].volume = x, 0, 0.5f);
     }
 
     void Update()

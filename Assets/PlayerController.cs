@@ -101,7 +101,7 @@ public class PlayerController : HPObjectController
     {
         //Destroy(gameObject);
         //restart game
-        transform.position = originalPosition;
+        transform.position = GameManager.Instance.currentRoom.respawnPoint.position;
         walkedDistance = 0;
         GameManager.Instance.stopGame();
     }

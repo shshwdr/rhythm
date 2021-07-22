@@ -1,17 +1,21 @@
+using Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomEnemyGenerator : MonoBehaviour
 {
-
+    public string roomId;
+    public int roomMusic = 3;
     Dictionary<System.Tuple<int, int>, int> roomAvailable;
 
-    EnemyController[] enemies;
+    List<EnemyController> enemies = new List<EnemyController>();
 
-    Transform respawnPoint;
+    public Transform respawnPoint;
     bool isCleared = false;
     bool isActivated = false;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,21 +30,40 @@ public class RoomEnemyGenerator : MonoBehaviour
         //generateHorizontalMovingEnemy();
         //generateHorizontalMovingEnemy();
         //generateHorizontalMovingEnemy();
-        enemies = GetComponentsInChildren<EnemyController>();
+        var allEnemies = new List<EnemyController>( GetComponentsInChildren<EnemyController>());
 
-        foreach (var enemy in enemies)
+        foreach (var enemy in allEnemies)
         {
-            enemy.room = this;
+            if (enemy.enabled&& enemy.gameObject.activeInHierarchy)
+            {
+
+                enemies.Add(enemy);
+                enemy.room = this;
+            }
         }
+
         respawnPoint = gameObject.transform.Find("respawnPoint");
     }
 
     public void enemyDie(EnemyController e)
     {
-        foreach (var enemy in enemies)
+        enemies.Remove(e);
+        if(enemies.Count == 0)
         {
-            
+            clearRoom();
         }
+    }
+
+    public void clearRoom()
+    {
+        if (isCleared)
+        {
+            Debug.Log("repeat clear room");
+            return;
+        }
+        isCleared = true;
+        EventPool.Trigger<string>("clearRoom", roomId);
+        GameMaster.Instance.removeAudioSource(roomMusic);
     }
 
     public void activateRoom()
@@ -58,6 +81,8 @@ public class RoomEnemyGenerator : MonoBehaviour
             return;
         }
         GameManager.Instance.currentRoom = this;
+
+        GameMaster.Instance.addAudioSource(roomMusic);
     }
 
     // Update is called once per frame
