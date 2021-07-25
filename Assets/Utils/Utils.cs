@@ -38,7 +38,7 @@ public class Utils : MonoBehaviour
 
     static float snapFloatCenter(float gridSize, float origin)
     {
-        return Mathf.Round(origin / gridSize) * gridSize + gridSize/2f;
+        return Mathf.Round((origin - gridSize / 2f) / gridSize) * gridSize + gridSize/2f;
     }
 
     static float floatToGridIndexCenter(float gridSize,float origin)

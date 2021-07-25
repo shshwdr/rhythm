@@ -5,8 +5,25 @@ using UnityEngine;
 
 public class EventActivator:MonoBehaviour
 {
-
-    private void Start()
+    string roomId;
+    protected virtual void Start()
     {
+        roomId = GetComponentInParent<RoomEnemyGenerator>().roomId;
+        EventPool.OptIn<string>("clearRoom", clearRoom_internal);
+    }
+
+
+    void clearRoom_internal(string id)
+    {
+        if (id == roomId)
+        {
+            EventPool.OptOut<string>("clearRoom", clearRoom_internal);
+            clearRoom();
+        }
+    }
+
+    protected virtual void clearRoom()
+    {
+
     }
 }
