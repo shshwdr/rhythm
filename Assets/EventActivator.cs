@@ -22,7 +22,7 @@ public class EventActivator:MonoBehaviour
         }
     }
 
-    protected virtual void clearRoom()
+    public virtual void clearRoom()
     {
 
     }

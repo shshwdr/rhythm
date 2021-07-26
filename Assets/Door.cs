@@ -5,7 +5,7 @@ using Pool;
 
 public class Door : EventActivator
 {
-    protected override void clearRoom()
+    public override void clearRoom()
     {
         gameObject.SetActive(false);
     }

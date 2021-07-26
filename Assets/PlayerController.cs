@@ -1,4 +1,6 @@
 using DG.Tweening;
+using Doozy.Engine.UI;
+using Pool;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +25,7 @@ public class PlayerController : HPObjectController
         animator.SetFloat("speed", 1);
         originalPosition = transform.position;
         MoveController.Instance.addPlayer(this);
+        EventPool.OptIn(EventPool.startGameEvent, reset);
     }
 
 
@@ -38,6 +41,15 @@ public class PlayerController : HPObjectController
     // Update is called once per frame
     protected override void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            foreach(var door in FindObjectsOfType<Door>())
+            {
+                door.clearRoom();
+            }
+        }
+
         if (isConversation)
         {
             return;
@@ -99,11 +111,20 @@ public class PlayerController : HPObjectController
 
     protected override void Die()
     {
+        base.Die();
         //Destroy(gameObject);
         //restart game
-        transform.position = GameManager.Instance.currentRoom.respawnPoint.position;
-        walkedDistance = 0;
         GameManager.Instance.stopGame();
+    }
+
+    public void reset()
+    {
+
+        transform.position = GameManager.Instance.currentRoom.respawnPoint.position;
+        getHeal();
+        isDead = false;
+        MoveController.Instance.updatePlayer(Utils.positionToGridIndexCenter2d(gridSize, transform.position));
+
     }
     public void getIntoConversation()
     {

@@ -42,7 +42,7 @@ public class GameMaster : Singleton<GameMaster>
     //count how long beat is active without an input
     private float beatActiveTime = 0f;
     new private bool enabled;
-    float invokeTime;
+    public float invokeTime;
 
     public float gridSize = 0.75f;
     public bool hasBeatInput
@@ -186,6 +186,7 @@ public class GameMaster : Singleton<GameMaster>
         if (!allowedToBeat && Input.anyKeyDown)
         {                     //mistiming beat with master beat
             audioSourceSFX.PlayOneShot(beatMissSigh);
+
             clearCommand();
             commandCount = 0;
         }
@@ -202,6 +203,7 @@ public class GameMaster : Singleton<GameMaster>
         {      //skipping a master beat
             lastBeatHasInput = true;
             clearCommand();
+            addMoveInput(-1);
 
         }
 
@@ -274,10 +276,20 @@ public class GameMaster : Singleton<GameMaster>
         bool commandMatched = teamController.GetInput(commandType);
         return commandMatched;
     }
+    public List<int> moveInput = new List<int>();
+    void addMoveInput(int i)
+    {
+        moveInput.Add(i);
+        EventPool.Trigger("player move input");
+    }
+    public void clearMoveInput()
+    {
+        moveInput.Clear();
+    }
 
     void GetDrumInputs()
     {
-        if (player.isConversation)
+        if (player.isConversation || !GameManager.Instance.isInGame)
         {
             return;
         }
@@ -355,7 +367,7 @@ public class GameMaster : Singleton<GameMaster>
                     hasBeatInput = true;
                     //MoveController.Instance.Move();
                     player.Move(new Vector2(-1, 0));
-
+                    addMoveInput(1);
                     //Array.Clear(commandType, 0, commandType.Length);
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -364,6 +376,7 @@ public class GameMaster : Singleton<GameMaster>
                     hasBeatInput = true;
                     //MoveController.Instance.Move();
                     player.Move(new Vector2(1, 0));
+                    addMoveInput(2);
 
                     //Array.Clear(commandType, 0, commandType.Length);
                 }
@@ -373,6 +386,7 @@ public class GameMaster : Singleton<GameMaster>
                     hasBeatInput = true;
                     //MoveController.Instance.Move();
                     player.Move(new Vector2(0, 1));
+                    addMoveInput(3);
 
                     //Array.Clear(commandType, 0, commandType.Length);
                 }
@@ -382,6 +396,7 @@ public class GameMaster : Singleton<GameMaster>
                     hasBeatInput = true;
                     //MoveController.Instance.Move();
                     player.Move(new Vector2(0, -1));
+                    addMoveInput(4);
 
                     // Array.Clear(commandType, 0, commandType.Length);
                 }

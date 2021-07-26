@@ -187,7 +187,7 @@ public class HPObjectController : MonoBehaviour
         {
             return;
         }
-        hp += 1;
+        hp += 100;
         updateHP();
         if (GetComponent<AudioSource>())
         {
@@ -220,7 +220,7 @@ public class HPObjectController : MonoBehaviour
         hp -= (int)damage;
         playHurtSound();
         updateHP();
-        if (hp == 0)
+        if (hp <= 0)
         {
             Die();
         }

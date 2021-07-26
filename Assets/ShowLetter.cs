@@ -19,7 +19,7 @@ public class ShowLetter : EventActivator
         collider.enabled = false;
     }
 
-    protected override void clearRoom()
+    public override void clearRoom()
     {
         base.clearRoom();
         renderer.enabled = true;

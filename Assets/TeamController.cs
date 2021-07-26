@@ -8,9 +8,9 @@ using System;
 [Serializable]
 public class Instruction
 {
-    public List<int> instructionStep;
     public bool isUnlocked;
     public string name;
+    public List<int> instructionStep;
     public Instruction(List<int> steps,bool unlock,string n)
     {
         instructionStep = steps;
@@ -64,11 +64,17 @@ public class TeamController : MonoBehaviour
 
     void InitInstructionUI()
     {
-        for(int i = 0;i< instructionsUI.childCount-1;i++) 
+        int i = 0;
+        for (;i< instructionsUI.childCount-1 && i<instructions.Count;i++) 
         {
             Transform child = instructionsUI.GetChild(i);
             child.GetComponent<OneInstructionRow>().Init(instructions[i]);
             instructionChildren.Add(child);
+        }
+        for(;i< instructionsUI.childCount - 1; i++)
+        {
+            Transform child = instructionsUI.GetChild(i);
+            child.GetComponent<OneInstructionRow>().gameObject.SetActive(false);
         }
     }
 
@@ -88,6 +94,14 @@ public class TeamController : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            for(int i = 0;i< instructions.Count;i++)
+            {
+                getInstruction(i);
+            }
+        }
+
         if (unmatchedCommandSprite.color != Color.clear)
             unmatchedCommandSprite.color = Color.Lerp(unmatchedCommandSprite.color, Color.clear, spriteFlashSpeed);
     }
@@ -104,6 +118,22 @@ public class TeamController : MonoBehaviour
             case 1:
                 Debug.Log("side");
                 GetComponent<SideAutoShoot>().startShoot();
+                break;
+            case 2:
+                Debug.Log("diagonal");
+                GetComponent<SideAutoShoot>().startShoot();
+                break;
+            case 3:
+                Debug.Log("forward blade");
+                GetComponent<PlayerBladeForward>().showBlade();
+                break;
+            case 4:
+                Debug.Log("round blade");
+                GetComponent<PlayerBladeAround>().showBlade();
+                break;
+            case 5:
+                Debug.Log("side blade");
+                GetComponent<PlayerBladeSide>().showBlade();
                 break;
         }
     }

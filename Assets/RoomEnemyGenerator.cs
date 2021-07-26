@@ -14,13 +14,15 @@ public class RoomEnemyGenerator : MonoBehaviour
     public Transform respawnPoint;
     bool isCleared = false;
     bool isActivated = false;
-
+    Collider2D collider;
 
 
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(setup());
+        collider = GetComponent<Collider2D>();
+        EventPool.OptIn(EventPool.startGameEvent,resetRoom);
     }
 
     IEnumerator setup()
@@ -47,11 +49,19 @@ public class RoomEnemyGenerator : MonoBehaviour
 
     public void enemyDie(EnemyController e)
     {
-        enemies.Remove(e);
-        if(enemies.Count == 0)
+        //enemies.Remove(e);
+        //if(enemies.Count == 0)
+        //{
+        //    clearRoom();
+        //}
+        foreach (var enemy in enemies)
         {
-            clearRoom();
+            if (!enemy.isDead)
+            {
+                return;
+            }
         }
+        clearRoom();
     }
 
     public void clearRoom()
@@ -66,6 +76,35 @@ public class RoomEnemyGenerator : MonoBehaviour
         GameMaster.Instance.removeAudioSource(roomMusic);
     }
 
+    public void resetRoom()
+    {
+        if (isCleared)
+        {
+            return;
+        }
+        foreach (var enemy in enemies)
+        {
+            if (enemy.isDead)
+            {
+                enemy.reset();
+            }
+            else
+            {
+                enemy.getDamage(1000);
+                enemy.reset();
+            }
+        }
+    }
+
+    public void leaveRoom()
+    {
+        GameMaster.Instance.removeAudioSource(roomMusic);
+        foreach (var movementTask in GetComponentsInChildren<FollowMovementTask>())
+        {
+            movementTask.disactive();
+        }
+    }
+
     public void activateRoom()
     {
         if (isActivated)
@@ -75,6 +114,10 @@ public class RoomEnemyGenerator : MonoBehaviour
         foreach(var enemy in enemies)
         {
             enemy.activate();
+        }
+        foreach(var movementTask in GetComponentsInChildren<FollowMovementTask>())
+        {
+            movementTask.active();
         }
         if (isCleared)
         {
@@ -88,7 +131,10 @@ public class RoomEnemyGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Alpha0 + int.Parse( roomId)))
+        {
+            FindObjectOfType<PlayerController>().gameObject.transform.position = respawnPoint.position;
+        }
     }
     void addDrops(GameObject walkingEnemy, Vector3 positionDir)
     {
@@ -121,5 +167,13 @@ public class RoomEnemyGenerator : MonoBehaviour
             addDrops(walkingEnemy, positionDir);
         }
 
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        activateRoom();
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        leaveRoom();
     }
 }

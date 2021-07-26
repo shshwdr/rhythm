@@ -69,11 +69,7 @@ public class EnemyController : HPObjectController
         base.Start();
 
         player = FindObjectOfType<PlayerController>();
-        if (ignoreTimeControl)
-        {
-            originalPosition = transform.position;
-            EventPool.OptIn(EventPool.stopGameEvent, restartGame);
-        }
+        originalPosition = transform.position;
         animator = GetComponentInChildren<Animator>();
         //EventPool.OptIn("Beat", Move);
         //animator.SetFloat("speed", 1);
@@ -228,6 +224,7 @@ public class EnemyController : HPObjectController
 
     protected override void Die()
     {
+        base.Die();
         if (isCoin)
         {
             GameObject go = ObjectPooler.Instance.GetPooledObject("coin");
@@ -248,5 +245,14 @@ public class EnemyController : HPObjectController
         exp.GetComponent<PoolObject>().fetch();
         exp.transform.position = transform.position;
         room.enemyDie(this);
+    }
+
+    public void reset()
+    {
+        GetComponent<PoolObject>().fetch();
+        MoveController.Instance.addEnemy(this);
+        transform.position = originalPosition;
+        getHeal();
+        isDead = false;
     }
 }

@@ -297,20 +297,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &101371368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6394077305622706754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be94124bc1ab46b42815c31e8c20218a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textLabel: {fileID: 6258128035280852439}
-  panel: {fileID: 4508477505916492285}
 --- !u!1 &6889653344321338167
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,10 +665,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6889653344321338168}
     m_Modifications:
-    - target: {fileID: 2557860542702627618, guid: 6129bc03b14ce684db2f6d35289014f0, type: 3}
-      propertyPath: m_SortingLayerID
-      value: 1928725545
-      objectReference: {fileID: 0}
     - target: {fileID: 3007361587476167607, guid: 6129bc03b14ce684db2f6d35289014f0, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -781,29 +763,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6129bc03b14ce684db2f6d35289014f0, type: 3}
---- !u!1 &6394077305622706754 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5340056308146825136, guid: 6129bc03b14ce684db2f6d35289014f0, type: 3}
-  m_PrefabInstance: {fileID: 1344293178385882610}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &6038761192143383885 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4713613816262635711, guid: 6129bc03b14ce684db2f6d35289014f0, type: 3}
   m_PrefabInstance: {fileID: 1344293178385882610}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &4508477505916492285 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3185935969351500815, guid: 6129bc03b14ce684db2f6d35289014f0, type: 3}
-  m_PrefabInstance: {fileID: 1344293178385882610}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6258128035280852439 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4935582144429803557, guid: 6129bc03b14ce684db2f6d35289014f0, type: 3}
-  m_PrefabInstance: {fileID: 1344293178385882610}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
