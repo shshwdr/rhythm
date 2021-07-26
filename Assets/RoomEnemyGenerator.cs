@@ -133,7 +133,7 @@ public class RoomEnemyGenerator : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha0 + int.Parse( roomId)))
         {
-            FindObjectOfType<PlayerController>().gameObject.transform.position = respawnPoint.position;
+            FindObjectOfType<PlayerController>().gameObject.transform.position = transform.Find("activator").position;
         }
     }
     void addDrops(GameObject walkingEnemy, Vector3 positionDir)
