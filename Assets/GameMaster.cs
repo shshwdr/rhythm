@@ -289,7 +289,7 @@ public class GameMaster : Singleton<GameMaster>
 
     void GetDrumInputs()
     {
-        if (player.isConversation || !GameManager.Instance.isInGame)
+        if (player.isConversation || !GameManager.Instance.isInGame || player.isDead)
         {
             return;
         }

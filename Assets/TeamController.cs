@@ -48,11 +48,13 @@ public class TeamController : MonoBehaviour
     public Image unmatchedCommandSprite;
     float spriteFlashSpeed = 0.5f;
     Color flashColor = new Color(255f, 255f, 255f, 1);
+    Animator animator;
 
     List<Transform> instructionChildren = new List<Transform>();
 
     void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         thisRigidbody = GetComponent<Rigidbody2D>();
 
         unmatchedCommand = GetComponent<AudioSource>();
@@ -109,6 +111,10 @@ public class TeamController : MonoBehaviour
 
     void doAttack(int i)
     {
+
+        animator.SetTrigger("shoot");
+        GetComponentInChildren<ParticleSystem>().Play();
+        Debug.Log("shoot");
         switch (i)
         {
             case 0:

@@ -22,7 +22,7 @@ public class PlayerController : HPObjectController
         base.Start();
         walkedDistance = 0;
         animator = GetComponentInChildren<Animator>();
-        animator.SetFloat("speed", 1);
+        //animator.SetFloat("speed", 1);
         originalPosition = transform.position;
         MoveController.Instance.addPlayer(this);
         EventPool.OptIn(EventPool.startGameEvent, reset);
@@ -31,7 +31,8 @@ public class PlayerController : HPObjectController
 
     public override Vector2 Move(Vector3 dir)
     {
-
+        animator.SetTrigger("jump");
+        Debug.Log("jump");
         var res  = base.Move(dir);
         MoveController.Instance.updatePlayer(res);
         movement = Vector2.zero;
@@ -112,8 +113,17 @@ public class PlayerController : HPObjectController
     protected override void Die()
     {
         base.Die();
+
+        animator.SetTrigger("die");
+        Debug.Log("die");
         //Destroy(gameObject);
         //restart game
+        StartCoroutine(stopGame());
+    }
+
+    IEnumerator stopGame()
+    {
+        yield return new WaitForSeconds(1);
         GameManager.Instance.stopGame();
     }
 
@@ -124,6 +134,7 @@ public class PlayerController : HPObjectController
         getHeal();
         isDead = false;
         MoveController.Instance.updatePlayer(Utils.positionToGridIndexCenter2d(gridSize, transform.position));
+        animator.Rebind();
 
     }
     public void getIntoConversation()
