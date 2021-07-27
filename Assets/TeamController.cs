@@ -127,7 +127,7 @@ public class TeamController : MonoBehaviour
                 break;
             case 2:
                 Debug.Log("diagonal");
-                GetComponent<SideAutoShoot>().startShoot();
+                GetComponent<DiagonalAutoShoot>().startShoot();
                 break;
             case 3:
                 Debug.Log("forward blade");

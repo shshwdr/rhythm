@@ -3,12 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ShowLetter : EventActivator
 {
+    public string text;
     public GameObject letterToRead;
-    public string letterName;
+    //public string letterName;
     SpriteRenderer renderer;
     Collider2D collider;
+
 
     protected override void Start()
     {
@@ -30,8 +33,12 @@ public class ShowLetter : EventActivator
     public void readLetter()
     {
         //letterToRead.SetActive(true);
-        letterToRead.GetComponent<LetterToRead>().loadLetter(letterName);
+        letterToRead.GetComponent<LetterToRead>().loadLetter(text);
         letterToRead.GetComponent<UIView>().Show();
+        if (GetComponent<GetInsturction>())
+        {
+            GetComponent<GetInsturction>().getInstruction();
+        }
     }
 
     public void hideLetter()

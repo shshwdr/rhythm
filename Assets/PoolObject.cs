@@ -12,11 +12,13 @@ public class PoolObject : MonoBehaviour
     protected Transform player;
 
 
+    protected bool isActive = false;
 
     public void fetch()
     {
         gameObject.SetActive(true);
         currentTimer = 0;
+        isActive = true;
     }
 
     private void Start()
@@ -26,7 +28,7 @@ public class PoolObject : MonoBehaviour
     }
 
     public virtual void returnBack(){
-
+        isActive = false;
         gameObject.SetActive(false);
     }
 
@@ -40,11 +42,11 @@ public class PoolObject : MonoBehaviour
         {
             return;
         }
-        if ((transform.position - player.position).sqrMagnitude >= 200)
-        {
+        //if ((transform.position - player.position).sqrMagnitude >= 200)
+        //{
 
-            returnBack();
-        }
+        //    returnBack();
+        //}
         currentTimer += Time.deltaTime;
         if (currentTimer >= returnTime)
         {

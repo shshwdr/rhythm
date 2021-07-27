@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Utils : MonoBehaviour
 {
+    static public Vector2[] dir4V2 = { new Vector2(1, 0), new Vector2(-1, 0), new Vector2(0, -1), new Vector2(0, 1), };
+    static public Vector2[] dir5V2 = { new Vector2(1, 0), new Vector2(-1, 0), new Vector2(0, -1), new Vector2(0, 1), new Vector2(0, 0), };
     static public bool randomBool()
     {
         return Random.Range(0, 2) > 0;
@@ -51,6 +53,14 @@ public class Utils : MonoBehaviour
         return new Vector3(snapFloat(gridSize, origin.x), snapFloat(gridSize, origin.y), snapFloat(gridSize, origin.z));
     }
 
+    public static int distanceToIndex(float gridSize, float distance)
+    {
+        return Mathf.RoundToInt(distance / gridSize);
+    }
+    public static int distanceCenterToIndex(float gridSize, float distance)
+    {
+        return Mathf.RoundToInt((distance - gridSize/2f) / gridSize);
+    }
 
     public static Vector3 snapToGridCenter(float gridSize, Vector3 origin)
     {
@@ -84,6 +94,14 @@ public class Utils : MonoBehaviour
         {
 
             return new Vector2(0,diff.y > 0 ? 1 : -1);
+        }
+    }
+
+    static public void destroyAllChildren(Transform tran)
+    {
+        foreach (Transform child in tran)
+        {
+            GameObject.Destroy(child.gameObject);
         }
     }
 }

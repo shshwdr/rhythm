@@ -35,26 +35,6 @@ public class EnemyController : HPObjectController
         maxHp = maxHp * multi;
         hp = maxHp;
 
-        if (coin && ability)
-        {
-            if (isCoin)
-            {
-                coin.SetActive(true);
-                ability.SetActive(false);
-            }
-            else if (isAbility)
-            {
-                ability.SetActive(true);
-                coin.SetActive(false);
-            }
-            else
-            {
-
-                coin.SetActive(false);
-
-                ability.SetActive(false);
-            }
-        }
     }
 
     public void activate()
@@ -96,10 +76,7 @@ public class EnemyController : HPObjectController
 
     public override Vector2 Move(Vector3 dir)
     {
-        if (GetComponent<EnemyAttack>())
-        {
-            GetComponent<EnemyAttack>().attack();
-        }
+
 
         //do extra work for enemy
         bool willColliderWall = checkIfCollideWall(dir);
@@ -150,6 +127,27 @@ public class EnemyController : HPObjectController
         {
             return Vector2.negativeInfinity;
         }
+
+        if (isDead)
+        {
+            return Vector2.negativeInfinity;
+
+        }
+
+        var attack = GetComponent<EnemyAttack>();
+        if (attack)
+        {
+            if (attack.shouldAttack())
+            {
+                GetComponent<EnemyAttack>().attack();
+
+            }
+            if (attack.isStanding)
+            {
+                return Vector2.negativeInfinity;
+            }
+        }
+
         currentMoveStep++;
         if (currentMoveStep >= moveStep)
         {
@@ -225,26 +223,27 @@ public class EnemyController : HPObjectController
     protected override void Die()
     {
         base.Die();
-        if (isCoin)
+        var dialog = GetComponent<DialogEnemy>();
+        if (dialog)
         {
-            GameObject go = ObjectPooler.Instance.GetPooledObject("coin");
-            go.GetComponent<PoolObject>().fetch();
-            go.transform.position = transform.position;
-        }else if (isAbility)
-        {
-            GameObject go = ObjectPooler.Instance.GetPooledObject("ability");
-            go.GetComponent<PoolObject>().fetch();
-            go.transform.position = transform.position;
+            dialog.readyDialog();
+            room.cleanRoom();
+            room.clearRoom();
         }
-        MoveController.Instance.removeEnemy(this);
-        GetComponent<PoolObject>().returnBack();
+        else
+        {
 
-        List<string> explosions = new List<string>() { "explosion", "explosion1", "explosion2", "explosion3", "explosion4", };
-        var selectedExplosion = explosions[Random.Range(0,explosions.Count)];
-        GameObject exp = ObjectPooler.Instance.GetPooledObject(selectedExplosion);
-        exp.GetComponent<PoolObject>().fetch();
-        exp.transform.position = transform.position;
-        room.enemyDie(this);
+            MoveController.Instance.removeEnemy(this);
+            GetComponent<PoolObject>().returnBack();
+
+            List<string> explosions = new List<string>() { "explosion", "explosion1", "explosion2", "explosion3", "explosion4", };
+            var selectedExplosion = explosions[Random.Range(0, explosions.Count)];
+            GameObject exp = ObjectPooler.Instance.GetPooledObject(selectedExplosion);
+            exp.GetComponent<PoolObject>().fetch();
+            exp.transform.position = transform.position;
+            room.enemyDie(this);
+        }
+
     }
 
     public void reset()

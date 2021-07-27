@@ -18,6 +18,8 @@ public class DiagonalAutoShoot : AutoShoot
         foreach (var offset in allBulletsStartOffset)
         {
             generateNormalBullet(new Vector3(1, 1, 0), offset);
+            generateNormalBullet(new Vector3(1, -1, 0), offset);
+            generateNormalBullet(new Vector3(-1, -1, 0), offset);
             generateNormalBullet(new Vector3(-1, 1, 0), offset);
         }
     }

@@ -115,7 +115,6 @@ GameObject:
   - component: {fileID: 1337939136942657031}
   - component: {fileID: 2009230650}
   - component: {fileID: 2009230649}
-  - component: {fileID: 4470293571827739991}
   m_Layer: 6
   m_Name: enemy
   m_TagString: Enemy
@@ -214,6 +213,8 @@ MonoBehaviour:
   chasePlayer: 0
   moveStep: 1
   canMoveDiagnal: 0
+  isActive: 0
+  room: {fileID: 0}
 --- !u!114 &2009230649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,52 +227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5755d305914c17542ad616508a80de16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  returnTime: 30
+  returnTime: -1
   cacheCount: 50
---- !u!114 &4470293571827739991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1337939136942657030}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4397b5a959fc2d74ea5b4874ed5ac798, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  moveSpeed: 0
-  maxHp: 10
-  isDead: 0
-  isStuned: 0
-  beHitClips: []
-  rb: {fileID: 0}
-  stunTime: 0.3
-  hasInvinsibleTime: 0
-  invinsibleTime: 0.3
-  elementType: 
-  hideWhenFarAway: {fileID: 0}
-  isImmortal: 0
-  moveMode: 0
-  facingRight: 1
-  movingDir: {x: 0, y: 0}
-  ignoreTimeControl: 0
-  coin: {fileID: 0}
-  ability: {fileID: 0}
-  chasePlayer: 0
-  moveStep: 1
-  canMoveDiagnal: 0
-  finishChasingDistance: 4.5
-  finishDashingDistance: 5
-  prepareTime: 5
-  prepareAllowDistanceOff: 0.5
-  prepareSpeedAdjust: 3
-  waitTime: 3
-  chaseSpeedAdd: 3
-  dashSpeedAdd: 3
-  rotateCenter: {x: 0, y: 0, z: 0}
-  waitSpeedMinus: 2
 --- !u!1 &1737526933567229663
 GameObject:
   m_ObjectHideFlags: 0

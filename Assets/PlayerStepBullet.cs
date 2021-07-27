@@ -85,7 +85,10 @@ public class PlayerStepBullet : StepBullet
 
     public  void checkStartAttack()
     {
-
+        if (!isActive)
+        {
+            return;
+        }
         GameObject willCollideObject = checkIfCollide(Vector3.zero);
         bool willCollideEnemy = willCollideObject && willCollideObject.GetComponent<EnemyController>();
         if (willCollideEnemy)
@@ -96,7 +99,10 @@ public class PlayerStepBullet : StepBullet
     }
     public override void checkAttack()
     {
-
+        if (!isActive)
+        {
+            return;
+        }
         GameObject willCollideObject = checkIfCollide(dir);
         bool willCollideEnemy = willCollideObject && willCollideObject.GetComponent<EnemyController>();
         if (willCollideEnemy)

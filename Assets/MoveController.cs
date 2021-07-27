@@ -151,6 +151,16 @@ public class MoveController : Singleton<MoveController>
         }
     }
 
+    public Vector2 positionOfObject(GameObject ob)
+    {
+        return objectToPosition[ob];
+    }
+
+    public Vector2 positionOfPlayer()
+    {
+        return objectToPosition[player.gameObject];
+    }
+
     public GameObject checkPositionItem(Vector2 position)
     {
         if (positionToObject.ContainsKey(position))

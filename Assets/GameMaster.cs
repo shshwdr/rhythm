@@ -121,13 +121,13 @@ public class GameMaster : Singleton<GameMaster>
 
         yield return new WaitForSeconds(errorMarginTime / 2f);
         audioSources[1].Play();
-        audioSources[2].Play();
+        //audioSources[2].Play();
         //GameManager.Instance.GetComponent<AudioSource>().Play();
     }
     public void addAudioSource(int i)
     {
         Debug.Log("audio sources time " + audioSources[1].time + " " + audioSources[2].time);
-        audioSources[i].time = audioSources[2].time;
+        audioSources[i].time = audioSources[1].time;
         audioSources[i].Play();
         audioSources[i].volume = 0;
         audioSources[i].DOKill();

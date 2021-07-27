@@ -64,6 +64,17 @@ public class RoomEnemyGenerator : MonoBehaviour
         clearRoom();
     }
 
+    public void cleanRoom()
+    {
+        foreach (var enemy in enemies)
+        {
+            if (!enemy.isDead)
+            {
+                enemy.getDamage(100);
+            }
+        }
+    }
+
     public void clearRoom()
     {
         if (isCleared)
@@ -124,8 +135,11 @@ public class RoomEnemyGenerator : MonoBehaviour
             return;
         }
         GameManager.Instance.currentRoom = this;
+        if (roomMusic > 0)
+        {
 
-        GameMaster.Instance.addAudioSource(roomMusic);
+            GameMaster.Instance.addAudioSource(roomMusic);
+        }
     }
 
     // Update is called once per frame
@@ -170,10 +184,19 @@ public class RoomEnemyGenerator : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        activateRoom();
+        if (collision.GetComponent<PlayerController>())
+        {
+
+            activateRoom();
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        leaveRoom();
+
+        if (collision.GetComponent<PlayerController>())
+        {
+
+            leaveRoom();
+        }
     }
 }

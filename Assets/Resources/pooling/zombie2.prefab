@@ -12,8 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20dcf6fc270a280419a42c1b750f436a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  intervalRound: 3
+  repeatAttack: 3
+  readyRound: 0
+  finishRound: 0
+  isStandingAttacking: 1
+  isStanding: 0
   shootTime: 0.7
-  isHorizontal: 1
+  dirs:
+  - {x: 1, y: 0}
 --- !u!1001 &6910923697822616606
 PrefabInstance:
   m_ObjectHideFlags: 0

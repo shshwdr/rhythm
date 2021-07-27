@@ -7,7 +7,7 @@ public class EnemyShooter : EnemyAttack
     protected int damage = 1;
     public float shootTime = 0.3f;
     float currentShootTimer = 0f;
-    public Vector2 dir = new Vector2(1, 0);
+    public List<Vector2> dirs = new List<Vector2>() { new Vector2(1, 0) };
     //void Update()
     //{
     //    currentShootTimer += Time.deltaTime;
@@ -32,6 +32,10 @@ public class EnemyShooter : EnemyAttack
     }
     protected virtual void Shoot()
     {
-        generateNormalBullet(dir, dir*gridSize);
+        foreach(var dir in dirs)
+        {
+
+            generateNormalBullet(dir, dir * gridSize);
+        }
     }
 }

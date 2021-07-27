@@ -8,6 +8,7 @@ TagManager:
   - PlayerBullet
   - Enemy
   - obstacle
+  - puzzle
   layers:
   - Default
   - TransparentFX
