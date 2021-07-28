@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8593196959494736583}
   - component: {fileID: 8593196959494736580}
   - component: {fileID: -7775201379246373}
+  - component: {fileID: 6097415928696497990}
   m_Layer: 0
   m_Name: EnemyBlade
   m_TagString: Untagged
@@ -120,5 +121,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf97c9967b146c8409bbc69de4ac1cc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6097415928696497990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8593196959494736577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8673204a4452ea4ca5ea6621fce83de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

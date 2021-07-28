@@ -8,7 +8,7 @@ public class EnemyAttack:MonoBehaviour
     public int intervalRound;
     public int repeatAttack = 1;
     protected int currentRepeatAttack = 0;
-    int currentIntervalRound = 0;
+    protected int currentIntervalRound = 0;
     public int readyRound = 0;
     int currentReadyRound = 0;
     public int finishRound = 0;
@@ -46,6 +46,7 @@ public class EnemyAttack:MonoBehaviour
 
             currentReadyRound = 0;
             doFinish();
+            GetComponent<EnemyController>().finishAttack();
             currentFinishRound = 0;
             return true;
         }

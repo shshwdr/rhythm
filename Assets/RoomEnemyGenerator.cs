@@ -93,16 +93,22 @@ public class RoomEnemyGenerator : MonoBehaviour
         {
             return;
         }
+        disactivateRoom();
         foreach (var enemy in enemies)
         {
             if (enemy.isDead)
             {
                 enemy.reset();
             }
+            else if (GetComponent<DialogEnemy>())
+            {
+                enemy.reset();
+            }
             else
             {
-                enemy.getDamage(1000);
-                enemy.reset();
+                enemy.softReset();
+                //enemy.getDamage(1000);
+                //enemy.reset();
             }
         }
     }
@@ -115,24 +121,47 @@ public class RoomEnemyGenerator : MonoBehaviour
             movementTask.disactive();
         }
     }
+    public void disactivateRoom()
+    {
+        if (!isActivated)
+        {
+            return;
+        }
+        if (isCleared)
+        {
+            return;
+        }
+        isActivated = false;
+        foreach (var enemy in enemies)
+        {
+            enemy.disactivate();
+        }
+        GameMaster.Instance.removeAudioSource(roomMusic);
+        foreach (var movementTask in GetComponentsInChildren<FollowMovementTask>())
+        {
+            movementTask.disactive();
+        }
 
+    }
     public void activateRoom()
     {
         if (isActivated)
         {
             return;
         }
-        foreach(var enemy in enemies)
+        if (isCleared)
+        {
+            return;
+        }
+
+        isActivated = true;
+        foreach (var enemy in enemies)
         {
             enemy.activate();
         }
         foreach(var movementTask in GetComponentsInChildren<FollowMovementTask>())
         {
             movementTask.active();
-        }
-        if (isCleared)
-        {
-            return;
         }
         GameManager.Instance.currentRoom = this;
         if (roomMusic > 0)

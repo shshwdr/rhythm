@@ -90,6 +90,14 @@ public class MoveController : Singleton<MoveController>
         setPosition(position, enemy.gameObject);
     }
 
+    public void updateEnemy(EnemyController enemy,Vector2 position)
+    {
+
+        Vector2 oldPosition = objectToPosition[enemy.gameObject];
+        setPosition(oldPosition, null);
+        setPosition(position, enemy.gameObject);
+    }
+
     public void removeEnemy(EnemyController enemy)
     {
         enemies.Remove(enemy);

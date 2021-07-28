@@ -126,6 +126,10 @@ public class GameMaster : Singleton<GameMaster>
     }
     public void addAudioSource(int i)
     {
+        if (i <= 0)
+        {
+            return;
+        }
         Debug.Log("audio sources time " + audioSources[1].time + " " + audioSources[2].time);
         audioSources[i].time = audioSources[1].time;
         audioSources[i].Play();
@@ -140,6 +144,10 @@ public class GameMaster : Singleton<GameMaster>
 
     public void removeAudioSource(int i)
     {
+        if (i <= 0)
+        {
+            return;
+        }
         audioSources[i].Stop();
 
         audioSources[i].volume = 1;
@@ -262,7 +270,7 @@ public class GameMaster : Singleton<GameMaster>
         EventPool.Trigger("Beat");
         if ((inactiveBeatCount) >= 0)
         {
-            audioSourceSFX.PlayOneShot(commandMutedBeat);
+           // audioSourceSFX.PlayOneShot(commandMutedBeat);
         }
         else
         {

@@ -97,6 +97,21 @@ public class Utils : MonoBehaviour
         }
     }
 
+    public static Vector2 chaseDir2dSecond(Vector3 chaser, Vector3 chasee)
+    {
+        var diff = chasee - chaser;
+        if (Mathf.Abs(diff.x) <= Mathf.Abs(diff.y))
+        {
+            return new Vector2(diff.x > 0 ? 1 : -1, 0);
+        }
+        else
+        {
+
+            return new Vector2(0, diff.y > 0 ? 1 : -1);
+        }
+    }
+
+
     static public void destroyAllChildren(Transform tran)
     {
         foreach (Transform child in tran)

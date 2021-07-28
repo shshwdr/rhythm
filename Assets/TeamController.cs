@@ -26,6 +26,9 @@ public class TeamController : MonoBehaviour
     Animator sprite2Animator;
     Animator[] spriteAnimators;
     Rigidbody2D thisRigidbody;
+    AudioSource audioSource;
+
+    public AudioClip attackSound;
 
     public Transform instructionsUI;
 
@@ -56,7 +59,7 @@ public class TeamController : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         thisRigidbody = GetComponent<Rigidbody2D>();
-
+        audioSource = GetComponent<AudioSource>();
         unmatchedCommand = GetComponent<AudioSource>();
         InitInstructionUI();
         //spriteAnimators = GetComponentsInChildren<Animator>();
@@ -111,6 +114,7 @@ public class TeamController : MonoBehaviour
 
     void doAttack(int i)
     {
+        audioSource.PlayOneShot(attackSound);
 
         animator.SetTrigger("shoot");
         GetComponentInChildren<ParticleSystem>().Play();

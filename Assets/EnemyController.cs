@@ -23,7 +23,8 @@ public class EnemyController : HPObjectController
     public bool isActive = false;
 
     public RoomEnemyGenerator room;
-
+    public int attackOrder;//0 one by one // 1 sequence
+    int currentAttackId = 0;
 
     Vector3 originalPosition;
     public virtual void init(Vector3 dir,bool c, bool a ,bool b,int multi)
@@ -42,6 +43,11 @@ public class EnemyController : HPObjectController
         isActive = true;
     }
 
+    public void disactivate()
+    {
+        isActive = false;
+    }
+
 
     // Start is called before the first frame update
     protected override void Start()
@@ -54,8 +60,11 @@ public class EnemyController : HPObjectController
         //EventPool.OptIn("Beat", Move);
         //animator.SetFloat("speed", 1);
         moveMode = 1;
-        MoveController.Instance. addEnemy(this);
-        
+        MoveController.Instance.addEnemy(this);
+        if (attackOrder == 1)
+        {
+            currentAttackId = -1;
+        }
     }
 
     void restartGame()
@@ -86,7 +95,7 @@ public class EnemyController : HPObjectController
         if (willCollidePlayer)
         {
             player.getDamage(1);
-            return Vector2.negativeInfinity;
+            return Utils.positionToGridIndexCenter2d(gridSize, (Vector3)rb.position + dir * gridSize); ;
         }
         else if (!willColliderWall && !willCollideEnemy)
         {
@@ -121,6 +130,20 @@ public class EnemyController : HPObjectController
 
     }
 
+    public void finishAttack()
+    {
+        if (attackOrder == 0)
+        {
+            var attacks = GetComponents<EnemyAttack>();
+            currentAttackId++;
+            currentAttackId = currentAttackId % attacks.Length;
+        }
+        else
+        {
+            currentAttackId = -1;
+        }
+    }
+
     public Vector2 Move()
     {
         if (!isActive)
@@ -133,13 +156,26 @@ public class EnemyController : HPObjectController
             return Vector2.negativeInfinity;
 
         }
-
+        var attacks = GetComponents<EnemyAttack>();
         var attack = GetComponent<EnemyAttack>();
+        if (attacks.Length >= 1)
+        {
+            if(attackOrder == 0)
+            {
+                //one by one
+                attack = attacks[currentAttackId]; 
+            }
+            else
+            {
+
+            }
+        }
         if (attack)
         {
             if (attack.shouldAttack())
             {
-                GetComponent<EnemyAttack>().attack();
+                attack.attack();
+
 
             }
             if (attack.isStanding)
@@ -162,6 +198,15 @@ public class EnemyController : HPObjectController
             var res  = Move(movingDir.normalized);
             if (res.Equals(Vector2.negativeInfinity))
             {
+
+
+                if (chasePlayer)
+                {
+                    movingDir = Vector3.zero;
+                    movingDir = Utils.chaseDir2dSecond(transform.position, player.transform.position);
+                    res = Move(movingDir.normalized);
+                }
+
                 movingDir = -movingDir;
             }
             return res;
@@ -253,5 +298,12 @@ public class EnemyController : HPObjectController
         transform.position = originalPosition;
         getHeal();
         isDead = false;
+    }
+
+    public void softReset()
+    {
+        MoveController.Instance.updateEnemy(this,originalPosition);
+        transform.position = originalPosition;
+        getHeal();
     }
 }
