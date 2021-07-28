@@ -85,6 +85,11 @@ public class TeamController : MonoBehaviour
 
     public void getInstruction(int i)
     {
+        if (instructions[i].isUnlocked)
+        {
+            return;
+        }
+        PixelCrushers.DialogueSystem.DialogueManager.ShowAlert("Get new skill "+ instructions[i].name);
         Transform child = instructionChildren[i];
         if (child.gameObject.activeInHierarchy)
         {

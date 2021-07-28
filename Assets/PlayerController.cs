@@ -26,6 +26,7 @@ public class PlayerController : HPObjectController
         originalPosition = transform.position;
         MoveController.Instance.addPlayer(this);
         EventPool.OptIn(EventPool.startGameEvent, reset);
+        isActive = true;
     }
 
 

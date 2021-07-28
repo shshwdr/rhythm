@@ -11,7 +11,7 @@ public class FlashAttack : EnemyAttack
 
     public Transform readyParent;
     public Transform attackParent;
-
+    
     protected override void Start()
     {
         base.Start();
@@ -35,15 +35,6 @@ public class FlashAttack : EnemyAttack
 
             return true;
         }
-
-
-
-        if (currentIntervalRound < intervalRound)
-        {
-            currentIntervalRound++;
-            return false;
-        }
-
         var playerIndexPosition = MoveController.Instance.positionOfPlayer();
         var enemyIndexPosition = MoveController.Instance.positionOfObject(gameObject);
         if (playerIndexPosition.x == enemyIndexPosition.x || playerIndexPosition.y == enemyIndexPosition.y)
@@ -51,11 +42,10 @@ public class FlashAttack : EnemyAttack
 
             return true;
         }
-
         return false;
     }
 
-    int distanceToWall(Vector2 dir)
+    protected int distanceToWall(Vector2 dir)
     {
         int layerMask = LayerMask.GetMask("wall");
 
@@ -116,6 +106,5 @@ public class FlashAttack : EnemyAttack
     {
 
         Utils.destroyAllChildren(attackParent);
-        currentIntervalRound = 0;
     }
 }

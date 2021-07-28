@@ -20,7 +20,6 @@ public class EnemyController : HPObjectController
     public bool canMoveDiagnal;
     bool canAttack;
 
-    public bool isActive = false;
 
     public RoomEnemyGenerator room;
     public int attackOrder;//0 one by one // 1 sequence

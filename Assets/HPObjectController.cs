@@ -6,6 +6,7 @@ using UnityEngine;
 public class HPObjectController : MonoBehaviour
 {
     public Animator animator;
+    public bool isActive = false;
     public float moveSpeed;
     public int maxHp = 10;
     protected int hp = 0;
@@ -209,7 +210,10 @@ public class HPObjectController : MonoBehaviour
         {
             return;
         }
-
+        if (!isActive)
+        {
+            return;
+        }
 
         //var scale = BattleManager.elementAdvantageScale(element, elementType);
         //int finalDamage = BattleManager.finalDamage(element, elementType, damage);
