@@ -3877,3 +3877,11 @@ System memory in use after: 100.0 MB.
 Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 5318.
 Total: 8.663200 ms (FindLiveObjects: 1.199300 ms CreateObjectMapping: 0.612800 ms MarkObjects: 6.253800 ms  DeleteObjects: 0.594800 ms)
 
+========================================================================
+Received Import Request.
+  Time since last request: 54538.247032 seconds.
+  path: Assets/Scenes/mainGame.unity
+  artifactKey: Guid(a9be649f6e81a094a85c38a3d973fa63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/mainGame.unity using Guid(a9be649f6e81a094a85c38a3d973fa63) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5da2ed49458a40b29e120cc199a6feb6') in 0.072161 seconds
+  Import took 0.255480 seconds .
+
