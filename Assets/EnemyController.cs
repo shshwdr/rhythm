@@ -127,6 +127,7 @@ public class EnemyController : HPObjectController
         bool willCollidePlayer = willCollideObject&& willCollideObject.GetComponent<PlayerController>();
         if (willCollidePlayer)
         {
+            animator.SetTrigger("shoot");
             player.getDamage(1);
             return Utils.positionToGridIndexCenter2d(gridSize, (Vector3)rb.position + dir * gridSize); ;
         }

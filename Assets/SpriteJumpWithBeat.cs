@@ -14,7 +14,7 @@ public class SpriteJumpWithBeat : MonoBehaviour
     }
     void Beat()
     {
-        if (enemyController.isActive)
+        if (!enemyController || enemyController.isActive)
         {
             transform.DOLocalJump(Vector3.zero, 0.15f, 1, 0.1f);
         }

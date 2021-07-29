@@ -118,6 +118,9 @@ public class FollowMovementTask : MonoBehaviour
                 {
                     adjustedI -= instructionList.Length;
                 }
+            }else if(k == -1)
+            {
+
             }
             for(int j = 1; j <= adjustedI + 1; j++)
             {
