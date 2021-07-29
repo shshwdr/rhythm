@@ -5,15 +5,32 @@ using UnityEngine;
 
 public class BulletSpriteMove : MonoBehaviour
 {
+    bool shouldMove;
+    Vector3 previous;
+    Vector3 newOne;
     void Start()
     {
         //EventPool.OptIn("Beat", Beat);
     }
-    public void Move(Vector3 previous,Vector3 newone)
+    public void Move(Vector3 p,Vector3 n)
     {
+        previous = p;
+        newOne = n;
+        shouldMove = true;
         //transform.position = previous;
-        transform.position += previous - newone;
-        transform.DOLocalMove(Vector3.zero,0.1f);
+    }
+    private void OnPostRender()
+    {
+
+        if (shouldMove)
+        {
+            transform.position += previous - newOne;
+            transform.DOLocalMove(Vector3.zero, 0.1f);
+            shouldMove = false;
+        }
+    }
+    private void LateUpdate()
+    {
     }
 
     // Update is called once per frame

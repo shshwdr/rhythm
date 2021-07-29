@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Chest : MonoBehaviour
 {
-
+    public Sprite openedSprite;
     public int instructionId = -1;
     TeamController teamController;
     public List<int> openInstruction;
@@ -52,7 +52,9 @@ public class Chest : MonoBehaviour
             {
                 teamController.getInstruction(instructionId);
             }
-            Destroy(gameObject);
+            GetComponent<SpriteRenderer>().sprite = openedSprite;
+            GetComponent<AudioSource>().Play();
+            //Destroy(gameObject);
             return true;
         }
         else

@@ -95,6 +95,8 @@ public class FlashAttack : EnemyAttack
 
     protected override void doAttack()
     {
+
+        animator.SetTrigger("shoot");
         foreach (Transform readyChild in readyParent)
         {
 

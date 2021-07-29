@@ -25,10 +25,10 @@ Transform:
   m_GameObject: {fileID: 1313124500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1286743097309972595}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1986264793
 GameObject:
@@ -55,10 +55,10 @@ Transform:
   m_GameObject: {fileID: 1986264793}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1286743097309972595}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1733605754
 MonoBehaviour:
@@ -90,6 +90,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1217966671094269611, guid: 88a4c3bc8c652b042b81cf622dca24b0, type: 3}
+      propertyPath: m_Bounds.m_Center.y
+      value: -0.005856015
+      objectReference: {fileID: 0}
     - target: {fileID: 1253277914699357613, guid: 88a4c3bc8c652b042b81cf622dca24b0, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -205,6 +209,22 @@ PrefabInstance:
     - target: {fileID: 5503615570830460806, guid: 88a4c3bc8c652b042b81cf622dca24b0, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290129263755567211, guid: 88a4c3bc8c652b042b81cf622dca24b0, type: 3}
+      propertyPath: m_Bounds.m_Center.y
+      value: -0.0029030442
+      objectReference: {fileID: 0}
+    - target: {fileID: 6290129263755567211, guid: 88a4c3bc8c652b042b81cf622dca24b0, type: 3}
+      propertyPath: m_Bounds.m_Extent.y
+      value: 0.49301308
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539084659679331504, guid: 88a4c3bc8c652b042b81cf622dca24b0, type: 3}
+      propertyPath: m_Bounds.m_Center.x
+      value: -0.0014303774
+      objectReference: {fileID: 0}
+    - target: {fileID: 7539084659679331504, guid: 88a4c3bc8c652b042b81cf622dca24b0, type: 3}
+      propertyPath: m_Bounds.m_Center.y
+      value: 0.04565811
       objectReference: {fileID: 0}
     - target: {fileID: 7550343646544531981, guid: 88a4c3bc8c652b042b81cf622dca24b0, type: 3}
       propertyPath: m_Controller

@@ -21,6 +21,11 @@ public class GameMaster : Singleton<GameMaster>
     AudioSource audioSourceSFX;
     AudioSource[] audioSources;
 
+
+    public AudioClip[] mutedBeatClips;
+    int[] mutedBeats = new int[4];
+    int mutedBeatId;
+
     [Header("Public references")]
     public TeamController teamController;
     bool allowedToBeat;
@@ -191,15 +196,15 @@ public class GameMaster : Singleton<GameMaster>
         GetDrumInputs();
 
 
-        if (!allowedToBeat && Input.anyKeyDown)
+        if (!allowedToBeat &&(Input.GetKeyDown(KeyCode.UpArrow)|| Input.GetKeyDown(KeyCode.DownArrow)|| Input.GetKeyDown(KeyCode.LeftArrow)|| Input.GetKeyDown(KeyCode.RightArrow)))
         {                     //mistiming beat with master beat
-            audioSourceSFX.PlayOneShot(beatMissSigh);
+             audioSourceSFX.PlayOneShot(beatMissSigh);
 
             clearCommand();
             commandCount = 0;
         }
 
-        if (inactiveBeatCount > 0 && Input.anyKeyDown)
+        if (inactiveBeatCount > 0 &&  (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow)))
         {               //interrupting command
             clearCommand();
             commandCount = 0;
@@ -270,7 +275,10 @@ public class GameMaster : Singleton<GameMaster>
         EventPool.Trigger("Beat");
         if ((inactiveBeatCount) >= 0)
         {
-           // audioSourceSFX.PlayOneShot(commandMutedBeat);
+            //use map to find beat
+            //audioSourceSFX.PlayOneShot(commandMutedBeat);
+            audioSourceSFX.PlayOneShot(mutedBeatClips[ mutedBeats[mutedBeatId]-1]);
+            mutedBeatId ++;
         }
         else
         {
@@ -281,7 +289,8 @@ public class GameMaster : Singleton<GameMaster>
 
     bool SetInput(int[] commandType)
     {
-        bool commandMatched = teamController.GetInput(commandType);
+        bool commandMatched = teamController.GetInput(commandType, ref mutedBeats);
+        mutedBeatId = 0;
         return commandMatched;
     }
     public List<int> moveInput = new List<int>();

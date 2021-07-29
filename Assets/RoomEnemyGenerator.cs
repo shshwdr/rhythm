@@ -16,6 +16,7 @@ public class RoomEnemyGenerator : MonoBehaviour
     bool isActivated = false;
     Collider2D collider;
 
+    public Door toCloseDoor;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +46,8 @@ public class RoomEnemyGenerator : MonoBehaviour
         }
 
         respawnPoint = gameObject.transform.Find("respawnPoint");
+        if (toCloseDoor)
+            toCloseDoor.openDoor();
     }
 
     public void enemyDie(EnemyController e)
@@ -61,7 +64,7 @@ public class RoomEnemyGenerator : MonoBehaviour
                 return;
             }
         }
-        clearRoom();
+            clearRoom();
     }
 
     public void cleanRoom()
@@ -73,6 +76,8 @@ public class RoomEnemyGenerator : MonoBehaviour
                 enemy.getDamage(100);
             }
         }
+        if (toCloseDoor)
+            toCloseDoor.openDoor();
     }
 
     public void clearRoom()
@@ -85,6 +90,8 @@ public class RoomEnemyGenerator : MonoBehaviour
         isCleared = true;
         EventPool.Trigger<string>("clearRoom", roomId);
         GameMaster.Instance.removeAudioSource(roomMusic);
+        if (toCloseDoor)
+            toCloseDoor.openDoor();
     }
 
     public void resetRoom()
@@ -111,6 +118,8 @@ public class RoomEnemyGenerator : MonoBehaviour
                 //enemy.reset();
             }
         }
+        if (toCloseDoor)
+            toCloseDoor.openDoor();
     }
 
     public void leaveRoom()
@@ -120,6 +129,8 @@ public class RoomEnemyGenerator : MonoBehaviour
         {
             movementTask.disactive();
         }
+        if (toCloseDoor)
+            toCloseDoor.openDoor();
     }
     public void disactivateRoom()
     {
@@ -142,6 +153,8 @@ public class RoomEnemyGenerator : MonoBehaviour
             movementTask.disactive();
         }
 
+        if (toCloseDoor)
+            toCloseDoor.openDoor();
     }
     public void activateRoom()
     {
@@ -168,6 +181,11 @@ public class RoomEnemyGenerator : MonoBehaviour
         {
 
             GameMaster.Instance.addAudioSource(roomMusic);
+        }
+        if (toCloseDoor)
+        {
+
+            toCloseDoor.closeDoor();
         }
     }
 

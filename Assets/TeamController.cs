@@ -119,7 +119,7 @@ public class TeamController : MonoBehaviour
 
     void doAttack(int i)
     {
-        audioSource.PlayOneShot(attackSound);
+        //audioSource.PlayOneShot(attackSound);
 
         animator.SetTrigger("shoot");
         GetComponentInChildren<ParticleSystem>().Play();
@@ -153,7 +153,7 @@ public class TeamController : MonoBehaviour
         }
     }
 
-    public bool GetInput(int[] commandType)
+    public bool GetInput(int[] commandType, ref int[] mutedBeats)
     {
         bool found = false;
         for(int i = 0; i < instructions.Count; i++)
@@ -165,9 +165,15 @@ public class TeamController : MonoBehaviour
                 {
                     doAttack(i);
                     found = true;
+
+                    for (int j = 0; j < commandType.Length; j++)
+                    {
+                        mutedBeats[j] = commandType[j];
+                    }
                 }
             }
         }
+
 
 
         int layerMask = LayerMask.GetMask("chest");

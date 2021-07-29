@@ -98,8 +98,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isLight: 1
-  turnedOn: {fileID: 21300000, guid: 60922846f62c9db4a8fc80c3db502817, type: 3}
-  turnedOff: {fileID: 21300000, guid: 4accfb74271eb1544b5f58e589e4d0a2, type: 3}
+  positionIndex: {x: 0, y: 0}
+  turnedOn: {fileID: 21300000, guid: d153871add1a1a743b30f25da987661a, type: 3}
+  turnedOff: {fileID: 21300000, guid: 60922846f62c9db4a8fc80c3db502817, type: 3}
 --- !u!61 &3218602998349310501
 BoxCollider2D:
   m_ObjectHideFlags: 0

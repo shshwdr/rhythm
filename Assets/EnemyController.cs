@@ -47,6 +47,19 @@ public class EnemyController : HPObjectController
         isActive = false;
     }
 
+    public override void getDamage(float damage = 1, string element = "")
+    {
+        base.getDamage(damage, element);
+        if (isDead)
+        {
+            animator.SetTrigger("die");
+
+        }
+        else
+        {
+            animator.SetTrigger("hit");
+        }
+    }
 
     // Start is called before the first frame update
     protected override void Start()
@@ -277,8 +290,6 @@ public class EnemyController : HPObjectController
         else
         {
 
-            MoveController.Instance.removeEnemy(this);
-            GetComponent<PoolObject>().returnBack();
 
             List<string> explosions = new List<string>() { "explosion", "explosion1", "explosion2", "explosion3", "explosion4", };
             var selectedExplosion = explosions[Random.Range(0, explosions.Count)];
@@ -286,8 +297,16 @@ public class EnemyController : HPObjectController
             exp.GetComponent<PoolObject>().fetch();
             exp.transform.position = transform.position;
             room.enemyDie(this);
+            StartCoroutine(remove());
         }
 
+    }
+
+    IEnumerator remove()
+    {
+        yield return new WaitForSeconds(0.5f);
+       // MoveController.Instance.removeEnemy(this);
+       // GetComponent<PoolObject>().returnBack();
     }
 
     public void reset()

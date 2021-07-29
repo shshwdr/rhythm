@@ -17,6 +17,8 @@ public class EnemyAttack:MonoBehaviour
     
     public bool isStandingAttacking = false;
     public bool isStanding = false;
+
+    protected Animator animator;
     public virtual bool isReadyToAttack()
     {
         if (currentReadyRound == readyRound)
@@ -81,7 +83,7 @@ public class EnemyAttack:MonoBehaviour
     }
     protected virtual void doAttack()
     {
-
+        
     }
     public virtual void attack()
     {
@@ -117,5 +119,6 @@ public class EnemyAttack:MonoBehaviour
     protected virtual void Start()
     {
         gridSize = GameMaster.Instance.gridSize;
+        animator = GetComponentInChildren<Animator>();
     }
 }

@@ -32,7 +32,8 @@ public class EnemyShooter : EnemyAttack
     }
     protected virtual void Shoot()
     {
-        foreach(var dir in dirs)
+        animator.SetTrigger("shoot");
+        foreach (var dir in dirs)
         {
 
             generateNormalBullet(dir, dir * gridSize);

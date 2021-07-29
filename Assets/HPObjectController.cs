@@ -36,6 +36,8 @@ public class HPObjectController : MonoBehaviour
     protected float gridSize;
 
     public int moveMode;
+    protected AudioSource deathSound;
+    public AudioClip deathClip;
     // Start is called before the first frame update
     virtual protected void Awake()
     {
@@ -55,9 +57,9 @@ public class HPObjectController : MonoBehaviour
     {
         int layerMask = LayerMask.GetMask("wall") | LayerMask.GetMask("chest");
 
-        RaycastHit hit;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, gridSize * 0.9f, layerMask);
         // Does the ray intersect any objects excluding the player layer
-        if (Physics2D.Raycast(transform.position, dir, gridSize * 0.9f, layerMask))
+        if (hit)
         {
             //Debug.DrawRay(transform.position, dir * 100 * 0.9f, Color.yellow);
             //Debug.Log("Did Hit");
@@ -141,6 +143,7 @@ public class HPObjectController : MonoBehaviour
 
     virtual protected void Start()
     {
+        deathSound = GameObject.Find("deathSound").GetComponent<AudioSource>();
         hp = maxHp;
         updateHP();
     }
@@ -248,6 +251,7 @@ public class HPObjectController : MonoBehaviour
     protected virtual void Die()
     {
         isDead = true;
+        deathSound.PlayOneShot(deathClip);
     }
 
 
