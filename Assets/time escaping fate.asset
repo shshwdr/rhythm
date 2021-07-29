@@ -7765,11 +7765,9 @@ MonoBehaviour:
         type: 0
         typeString: 
       - title: Dialogue Text
-        value: 'This forest looks different than I remember from when I was a kid.
+        value: This forest looks different than I remember from when I was a kid.
           The never-ending darkness must have corrupted it just like our town. I
           wonder if the cause of the famine is here too.
-
-'
         type: 0
         typeString: 
       - title: Parenthetical
@@ -7841,7 +7839,7 @@ MonoBehaviour:
         typeString: 
       - title: Dialogue Text
         value: "If I could just find my brother Brio, maybe he can tell me what\u2019s
-          going on. He was always Dad\u2019s favorite.\r\n"
+          going on. He was always Dad\u2019s favorite.\r"
         type: 0
         typeString: 
       - title: Parenthetical

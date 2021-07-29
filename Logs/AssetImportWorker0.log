@@ -19,3 +19,351 @@ Logs/AssetImportWorker0.log
 Successfully changed project path to: C:/Users/csviv/Desktop/unity/rhythem game
 C:/Users/csviv/Desktop/unity/rhythem game
 Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 560.74 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.4f1 (0abb6314276a)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2019.4.22f1/Editor/2020.3.4f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/csviv/Desktop/unity/rhythem game/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) Iris(R) Plus Graphics (ID=0x8a52)
+    Vendor:   
+    VRAM:     7985 MB
+    Driver:   27.20.100.8681
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2019.4.22f1/Editor/2020.3.4f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2019.4.22f1/Editor/2020.3.4f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2019.4.22f1/Editor/2020.3.4f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56912
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2019.4.22f1/Editor/2020.3.4f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2019.4.22f1/Editor/2020.3.4f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.005056 seconds.
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 476.15 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.108 seconds
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.008363 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 523.07 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  4.505 seconds
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.10 seconds
+Refreshing native plugins compatible for Editor in 2.21 ms, found 1 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 4634 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 193.5 MB.
+System memory in use after: 193.6 MB.
+
+Unloading 116 unused Assets to reduce memory usage. Loaded Objects now: 5069.
+Total: 7.516700 ms (FindLiveObjects: 0.831000 ms CreateObjectMapping: 0.570900 ms MarkObjects: 5.553900 ms  DeleteObjects: 0.556400 ms)
+
+========================================================================
+Received Import Request.
+  path: Assets/art/rhythm extra/Letter closed.png
+  artifactKey: Guid(dae9b67a6e23ea44996298ef7e35ff79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/art/rhythm extra/Letter closed.png using Guid(dae9b67a6e23ea44996298ef7e35ff79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '620c982020c286f6812d6fe4f2e04573') in 0.328063 seconds
+  Import took 0.349596 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000407 seconds.
+  path: Assets/Resources/chest.prefab
+  artifactKey: Guid(95881f08dc000c941a43bba4366b07b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/chest.prefab using Guid(95881f08dc000c941a43bba4366b07b7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ae009d30cf5bfeecced14f67eef0e209') in 0.316238 seconds
+  Import took 0.345005 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 1.300821 seconds.
+  path: Assets/Resources/letter.prefab
+  artifactKey: Guid(f33f7445b620d1444babc5beb4439b79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/letter.prefab using Guid(f33f7445b620d1444babc5beb4439b79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5ff093f41b7f8a3a1bf05387765c6e03') in 0.037284 seconds
+  Import took 0.062257 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 211.269762 seconds.
+  path: Assets/art/rhythm extra2/Portrait Player.png
+  artifactKey: Guid(f4f1e54ed401f6141bfc2e31c740417d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/art/rhythm extra2/Portrait Player.png using Guid(f4f1e54ed401f6141bfc2e31c740417d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '44bc5e518296b7b3faffd00569146a69') in 0.057039 seconds
+  Import took 0.093011 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.693926 seconds.
+  path: Assets/art/rhythm extra2/Portrait Miniboss.png
+  artifactKey: Guid(88ad9bbeb074e8b4ca3e7422b8e3adc5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/art/rhythm extra2/Portrait Miniboss.png using Guid(88ad9bbeb074e8b4ca3e7422b8e3adc5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f24ec4b5c183f8d152e54f7818eea7ab') in 0.049579 seconds
+  Import took 0.075656 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.550345 seconds.
+  path: Assets/art/rhythm extra2/Portrait Brio Corrupted.png
+  artifactKey: Guid(a7f84d5d495770f40bf6b430c8550c24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/art/rhythm extra2/Portrait Brio Corrupted.png using Guid(a7f84d5d495770f40bf6b430c8550c24) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '15e6de44827b992e08c5ca48cfe6dc22') in 0.046500 seconds
+  Import took 0.073174 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.703669 seconds.
+  path: Assets/art/rhythm extra2/Portrait Spirit Friend.png
+  artifactKey: Guid(fe54ef80bfae3a343a80cfe878d5a866) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/art/rhythm extra2/Portrait Spirit Friend.png using Guid(fe54ef80bfae3a343a80cfe878d5a866) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9cb05372d5318b44cbc83c2e85857438') in 0.049028 seconds
+  Import took 0.074683 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 24.200555 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/ban.png
+  artifactKey: Guid(d8afddefa20d10347a53b9ff8dbd48e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/ban.png using Guid(d8afddefa20d10347a53b9ff8dbd48e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aac7d8c5c06914f5a2427939920e7ca1') in 0.060359 seconds
+  Import took 0.083521 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000546 seconds.
+  path: Assets/Doozy/Examples/Icons/Simple/book, literature, textbook.png
+  artifactKey: Guid(8d01b3da5e8c424449c0a26135a053c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Simple/book, literature, textbook.png using Guid(8d01b3da5e8c424449c0a26135a053c3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '204448f713d963bd179c91f334d6baf4') in 0.068644 seconds
+  Import took 0.091226 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000538 seconds.
+  path: Assets/art/rhythm extra2/Beam Warning.png
+  artifactKey: Guid(0836f4609ff4fef4c807915a875a33a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/art/rhythm extra2/Beam Warning.png using Guid(0836f4609ff4fef4c807915a875a33a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a8922213281ed7c53a619968849990a0') in 0.045260 seconds
+  Import took 0.072001 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000615 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/bomb.png
+  artifactKey: Guid(16c8f15a02cf7bb43a09c07aecdac0ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/bomb.png using Guid(16c8f15a02cf7bb43a09c07aecdac0ed) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '632d6c081c99483f1d1686e4c4063dd1') in 0.063490 seconds
+  Import took 0.087991 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000405 seconds.
+  path: Assets/RythmJam/Brio/Brio.psb
+  artifactKey: Guid(96e22eaa14e6de846ad914e55bd8d672) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/RythmJam/Brio/Brio.psb using Guid(96e22eaa14e6de846ad914e55bd8d672) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '67fe08014160fb9a4d3b72b21ad5d6bc') in 0.227388 seconds
+  Import took 0.260104 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000684 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/ban.png
+  artifactKey: Guid(d8afddefa20d10347a53b9ff8dbd48e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/ban.png using Guid(d8afddefa20d10347a53b9ff8dbd48e7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aac7d8c5c06914f5a2427939920e7ca1') in 0.046765 seconds
+  Import took 0.072097 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000599 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/bell.png
+  artifactKey: Guid(0022f5f405a236347bc8ee192cf6cea9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/bell.png using Guid(0022f5f405a236347bc8ee192cf6cea9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1ffd84d84158d02b6da5f4d9e2133351') in 0.060431 seconds
+  Import took 0.087425 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000669 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/bolt.png
+  artifactKey: Guid(90b6c4051aa7fe041a911f071372b53b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/bolt.png using Guid(90b6c4051aa7fe041a911f071372b53b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0ea5cd2d8cd0d669e3575c9cdd811aad') in 0.062739 seconds
+  Import took 0.092376 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000386 seconds.
+  path: Assets/Doozy/Examples/Icons/Simple/Bookmark, add, web.png
+  artifactKey: Guid(9b1957883285775429454bc13d114ee4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Simple/Bookmark, add, web.png using Guid(9b1957883285775429454bc13d114ee4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4c56b6536d40268b89c9340d3e332bb9') in 0.064598 seconds
+  Import took 0.093619 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000599 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/bat.png
+  artifactKey: Guid(7e26ef45ca0a901409dbd89cbfc00eb0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/bat.png using Guid(7e26ef45ca0a901409dbd89cbfc00eb0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2159f6765ec029aaf6169bfafd42f0b9') in 0.046107 seconds
+  Import took 0.069135 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 14.397559 seconds.
+  path: Assets/time escaping fate.asset
+  artifactKey: Guid(7f77b044c7aff2d418c5ebb19e4558c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/time escaping fate.asset using Guid(7f77b044c7aff2d418c5ebb19e4558c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7d895c97932b5ff76a4e795c85a49ab') in 0.087331 seconds
+  Import took 0.108572 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.433763 seconds.
+  path: Assets/time escaping fate.asset
+  artifactKey: Guid(7f77b044c7aff2d418c5ebb19e4558c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/time escaping fate.asset using Guid(7f77b044c7aff2d418c5ebb19e4558c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e51efe39969b0e47c259e63829875fce') in 0.035974 seconds
+  Import took 0.065471 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.006784 seconds.
+  path: Assets/time escaping fate.asset
+  artifactKey: Guid(7f77b044c7aff2d418c5ebb19e4558c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/time escaping fate.asset using Guid(7f77b044c7aff2d418c5ebb19e4558c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e51efe39969b0e47c259e63829875fce') in 0.029426 seconds
+  Import took 0.048493 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 11.420394 seconds.
+  path: Assets/art/rhythm extra2/Portrait Brio.png
+  artifactKey: Guid(7832bc97ab61c0a4cbc2ceeb93a3f31c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/art/rhythm extra2/Portrait Brio.png using Guid(7832bc97ab61c0a4cbc2ceeb93a3f31c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad9b6cff94d8bd130e4c09348aa1873f') in 0.050569 seconds
+  Import took 0.072153 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.001165 seconds.
+  path: Assets/art/rhythm extra2/Portrait Brio.png
+  artifactKey: Guid(7832bc97ab61c0a4cbc2ceeb93a3f31c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/art/rhythm extra2/Portrait Brio.png using Guid(7832bc97ab61c0a4cbc2ceeb93a3f31c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ad9b6cff94d8bd130e4c09348aa1873f') in 0.042729 seconds
+  Import took 0.069544 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 4.104072 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/portrait.png
+  artifactKey: Guid(be247d9afbe83224b9f83b83b6efc37b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/portrait.png using Guid(be247d9afbe83224b9f83b83b6efc37b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'aad9e69ba3eb1346af147c640b57f8ca') in 0.059331 seconds
+  Import took 0.083779 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000418 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/rectangle-landscape.png
+  artifactKey: Guid(c8689ab7eb069d042977c6f8ac7ce918) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/rectangle-landscape.png using Guid(c8689ab7eb069d042977c6f8ac7ce918) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec9df51195fea22d03366f5e0895c1bf') in 0.049792 seconds
+  Import took 0.070352 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000373 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/rectangle-wide.png
+  artifactKey: Guid(7cd9d16a2693e8747861b8305a079d0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/rectangle-wide.png using Guid(7cd9d16a2693e8747861b8305a079d0b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc8a44cfd1fa2b77fa12ff8db9b6201f') in 0.040452 seconds
+  Import took 0.062617 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000392 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/random.png
+  artifactKey: Guid(98344868491f0d24a9c0c3d77b49318c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/random.png using Guid(98344868491f0d24a9c0c3d77b49318c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '962d219cd219645aed518329e11d1142') in 0.052899 seconds
+  Import took 0.074202 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000855 seconds.
+  path: Assets/Doozy/Examples/Icons/Simple/radar, astronomy, cosmos, satellite.png
+  artifactKey: Guid(ee26522799c73624689957384d782c0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Simple/radar, astronomy, cosmos, satellite.png using Guid(ee26522799c73624689957384d782c0c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fea478b9cb7ea6e839c99c151d96f912') in 0.048211 seconds
+  Import took 0.069115 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000437 seconds.
+  path: Assets/Doozy/Examples/Icons/Simple/Recorder, microphone, sound.png
+  artifactKey: Guid(36e6941483cceef48b7f045fe17ad575) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Simple/Recorder, microphone, sound.png using Guid(36e6941483cceef48b7f045fe17ad575) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a6e34e9fb67975771153d6b2d6095cac') in 0.046730 seconds
+  Import took 0.069082 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000441 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/question.png
+  artifactKey: Guid(f181d7d5b53668344886dbb28a08cbdc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/question.png using Guid(f181d7d5b53668344886dbb28a08cbdc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc5f21859efd231d773a272106d0860d') in 0.053798 seconds
+  Import took 0.075008 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000430 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/radiation.png
+  artifactKey: Guid(0311c904189b1534d8505f511516450d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/radiation.png using Guid(0311c904189b1534d8505f511516450d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '56f279acfd5d2fc2c8a06a2a44bda421') in 0.052712 seconds
+  Import took 0.073800 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000390 seconds.
+  path: Assets/Plugins/Pixel Crushers/Dialogue System/Prefabs/Art/Textures/Basic/portrait.png
+  artifactKey: Guid(8fbfa1bc77a0388499f83f32b410eea3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Plugins/Pixel Crushers/Dialogue System/Prefabs/Art/Textures/Basic/portrait.png using Guid(8fbfa1bc77a0388499f83f32b410eea3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '53c061aba7b0d6d1020e1613fe2a70e5') in 0.029006 seconds
+  Import took 0.047038 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000448 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/puzzle-piece.png
+  artifactKey: Guid(8a55fb665d4922343a36076d6b8ad526) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/puzzle-piece.png using Guid(8a55fb665d4922343a36076d6b8ad526) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6f80ca02ac5e0683ac1929d33fbc179') in 0.049979 seconds
+  Import took 0.072166 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000595 seconds.
+  path: Assets/art/rhythm extra2/Projectile 2.png
+  artifactKey: Guid(efe85a361fe02da499c09cede247ea72) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/art/rhythm extra2/Projectile 2.png using Guid(efe85a361fe02da499c09cede247ea72) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '275e1e60aea87995aa113eb935d23cbf') in 0.043263 seconds
+  Import took 0.070075 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000728 seconds.
+  path: Assets/Doozy/Examples/Icons/Simple/Power, shutdown, start.png
+  artifactKey: Guid(84d56b31b2072524aaf385de4860de42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Simple/Power, shutdown, start.png using Guid(84d56b31b2072524aaf385de4860de42) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc87e1a3db812998d3fff5c4aac9b44a') in 0.052893 seconds
+  Import took 0.072792 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000396 seconds.
+  path: Assets/Doozy/Examples/Icons/Simple/qr, code, scan, barcode.png
+  artifactKey: Guid(9b7d0f0c56173f347b51a74cee632f44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Simple/qr, code, scan, barcode.png using Guid(9b7d0f0c56173f347b51a74cee632f44) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e24f0b5691f5103368a0a9e642fae480') in 0.051663 seconds
+  Import took 0.071104 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000474 seconds.
+  path: Assets/Doozy/Examples/Icons/Awesome/rectangle-portrait.png
+  artifactKey: Guid(bfdbba35552ffa04a84ae71001377c6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Doozy/Examples/Icons/Awesome/rectangle-portrait.png using Guid(bfdbba35552ffa04a84ae71001377c6e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4d4dd2c53c5e285825644d7538a1ead8') in 0.049795 seconds
+  Import took 0.071004 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 31.590966 seconds.
+  path: Assets/time escaping fate.asset
+  artifactKey: Guid(7f77b044c7aff2d418c5ebb19e4558c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/time escaping fate.asset using Guid(7f77b044c7aff2d418c5ebb19e4558c9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd94951b0da6367aebcf917190009291f') in 0.037601 seconds
+  Import took 0.064703 seconds .
+
