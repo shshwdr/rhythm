@@ -9,9 +9,9 @@ public class FlickWithBeat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("beat", 0, GameMaster.Instance.invokeTime);
-        //beat();
-        //EventPool.OptIn("Beat",beat);
+        //InvokeRepeating("beat", 0, GameMaster.Instance.invokeTime);
+        beat();
+        EventPool.OptIn("Beat",beat);
     }
     void beat()
     {

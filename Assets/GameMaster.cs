@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class GameMaster : Singleton<GameMaster>
 {
+    bool shouldGetMoveInput = false;
 
     public AudioClip masterBeat;
     public AudioClip commandMutedBeat;
@@ -50,6 +51,16 @@ public class GameMaster : Singleton<GameMaster>
     public float invokeTime;
 
     public float gridSize = 0.75f;
+
+    public void startMoveInput()
+    {
+        shouldGetMoveInput = true;
+    }
+    public void stopMoveInput()
+    {
+        shouldGetMoveInput = false;
+        clearMoveInput();
+    }
     public bool hasBeatInput
     {
         get
@@ -84,7 +95,7 @@ public class GameMaster : Singleton<GameMaster>
     float feverTimeHold;
     public Image feverSprite;
 
-
+    public float extraLayerVolume = 0.3f;
 
     void Start()
     {
@@ -140,7 +151,7 @@ public class GameMaster : Singleton<GameMaster>
         audioSources[i].Play();
         audioSources[i].volume = 0;
         audioSources[i].DOKill();
-        DOTween.To(() => audioSources[i].volume, x => audioSources[i].volume = x, 1, 0.5f);
+        DOTween.To(() => audioSources[i].volume, x => audioSources[i].volume = x, extraLayerVolume, 0.5f);
         // Tween a Vector3 called myVector to 3,4,8 in 1 second
         //DOTween.To(() => myVector, x => myVector = x, new Vector3(3, 4, 8), 1);
         // Tween a float called myFloat to 52 in 1 second
@@ -155,7 +166,7 @@ public class GameMaster : Singleton<GameMaster>
         }
         audioSources[i].Stop();
 
-        audioSources[i].volume = 1;
+        audioSources[i].volume = extraLayerVolume;
         audioSources[i].DOKill();
         DOTween.To(() => audioSources[i].volume, x => audioSources[i].volume = x, 0, 0.5f);
     }
@@ -216,8 +227,8 @@ public class GameMaster : Singleton<GameMaster>
         {      //skipping a master beat
             lastBeatHasInput = true;
             clearCommand();
-            addMoveInput(-1);
-
+            //addMoveInput(-1);
+            clearMoveInput();
         }
 
         if (currentDrumSprite != null)
@@ -296,8 +307,12 @@ public class GameMaster : Singleton<GameMaster>
     public List<int> moveInput = new List<int>();
     void addMoveInput(int i)
     {
-        moveInput.Add(i);
-        EventPool.Trigger("player move input");
+        if (shouldGetMoveInput)
+        {
+
+            moveInput.Add(i);
+            EventPool.Trigger("player move input");
+        }
     }
     public void clearMoveInput()
     {

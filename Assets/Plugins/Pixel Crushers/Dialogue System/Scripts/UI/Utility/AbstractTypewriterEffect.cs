@@ -18,7 +18,7 @@ namespace PixelCrushers.DialogueSystem
         /// </summary>
         [Tooltip("Tick for right-to-left text such as Arabic.")]
         public bool rightToLeft = false;
-
+        int lastClipId = -1;
         /// <summary>
         /// How fast to "type."
         /// </summary>
@@ -201,6 +201,11 @@ namespace PixelCrushers.DialogueSystem
             if (alternateAudioClips != null && alternateAudioClips.Length > 0)
             {
                 var randomIndex = UnityEngine.Random.Range(0, alternateAudioClips.Length + 1);
+                while(randomIndex == lastClipId)
+                {
+                    randomIndex = UnityEngine.Random.Range(0, alternateAudioClips.Length + 1);
+                }
+                lastClipId = randomIndex;
                 randomClip = (randomIndex < alternateAudioClips.Length) ? alternateAudioClips[randomIndex] : audioClip;
             }
             if (interruptAudioClip)

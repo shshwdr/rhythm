@@ -5,14 +5,19 @@ using UnityEngine;
 using DG.Tweening;
 public class SpriteJumpWithBeat : MonoBehaviour
 {
+    EnemyController enemyController;
     // Start is called before the first frame update
     void Start()
     {
         EventPool.OptIn("Beat", Beat);
+        enemyController = GetComponentInParent<EnemyController>();
     }
     void Beat()
     {
-        transform.DOLocalJump(Vector3.zero, 0.08f, 1, 0.1f);
+        if (enemyController.isActive)
+        {
+            transform.DOLocalJump(Vector3.zero, 0.15f, 1, 0.1f);
+        }
     }
 
     // Update is called once per frame

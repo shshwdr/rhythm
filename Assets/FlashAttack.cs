@@ -15,6 +15,19 @@ public class FlashAttack : EnemyAttack
     protected override void Start()
     {
         base.Start();
+
+        for (int i = 0; i < 20; i++)
+        {
+
+            var blade = Instantiate(flashPrefab, readyParent);
+            blade.SetActive(false);
+        }
+        for (int i = 0; i < 20; i++)
+        {
+
+            var blade = Instantiate(attackPrefab, attackParent);
+            blade.SetActive(false);
+        }
     }
 
     // Start is called before the first frame update
@@ -82,7 +95,18 @@ public class FlashAttack : EnemyAttack
                 for (int i = 1; i <= distance; i++)
                 {
                     var position = dir * i;
-                    var blade = Instantiate(flashPrefab, transform.position + (Vector3)position * gridSize, Quaternion.identity, readyParent);
+                    int index = i - 1;
+                    if (index < readyParent.childCount)
+                    {
+                        var blade = readyParent.GetChild(index);
+                        blade.transform.position = transform.position + (Vector3)position * gridSize;
+                        blade.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    //var blade = Instantiate(flashPrefab, transform.position + (Vector3)position * gridSize, Quaternion.identity, readyParent);
                 }
             }
             else
@@ -97,16 +121,27 @@ public class FlashAttack : EnemyAttack
     {
 
         animator.SetTrigger("shoot");
+        int index = 0;
         foreach (Transform readyChild in readyParent)
         {
 
-            var blade = Instantiate(attackPrefab, readyChild.position, Quaternion.identity, attackParent);
+            if (readyChild.gameObject.active && index < readyParent.childCount)
+            {
+                var blade = attackParent.GetChild(index);
+                blade.transform.position = readyChild.position;
+                blade.gameObject.SetActive(true);
+                index++;
+            }
+            else
+            {
+                break;
+            }
         }
-        Utils.destroyAllChildren(readyParent);
+        Utils.setActiveOfAllChildren(readyParent);
     }
-    protected override void doFinish()
+    public override void doFinish()
     {
 
-        Utils.destroyAllChildren(attackParent);
+        Utils.setActiveOfAllChildren(attackParent);
     }
 }

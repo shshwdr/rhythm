@@ -119,4 +119,12 @@ public class Utils : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
     }
+
+    static public void setActiveOfAllChildren(Transform tran, bool active = false)
+    {
+        foreach (Transform child in tran)
+        {
+            child.gameObject.SetActive(active);
+        }
+    }
 }

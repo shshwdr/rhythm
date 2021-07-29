@@ -24,7 +24,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2009230650, guid: 5d77390d53382134482583ecfe7f553e, type: 3}
       propertyPath: maxHp
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2009230650, guid: 5d77390d53382134482583ecfe7f553e, type: 3}
       propertyPath: moveStep
@@ -170,11 +170,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 823707007019659847, guid: e17ae25dc8748de4180f4c99bab6aaa3, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.005856015
+      value: -0.0058548227
       objectReference: {fileID: 0}
     - target: {fileID: 1438036859764693238, guid: e17ae25dc8748de4180f4c99bab6aaa3, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1438036859764693238, guid: e17ae25dc8748de4180f4c99bab6aaa3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -226,19 +226,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5531111035425936519, guid: e17ae25dc8748de4180f4c99bab6aaa3, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.0029030442
+      value: -0.0029048324
       objectReference: {fileID: 0}
     - target: {fileID: 5531111035425936519, guid: e17ae25dc8748de4180f4c99bab6aaa3, type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.34614503
+      value: 0.34614497
       objectReference: {fileID: 0}
     - target: {fileID: 5531111035425936519, guid: e17ae25dc8748de4180f4c99bab6aaa3, type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 0.49301308
+      value: 0.4930151
+      objectReference: {fileID: 0}
+    - target: {fileID: 8298241435064758364, guid: e17ae25dc8748de4180f4c99bab6aaa3, type: 3}
+      propertyPath: m_Bounds.m_Center.x
+      value: -0.0014300793
       objectReference: {fileID: 0}
     - target: {fileID: 8298241435064758364, guid: e17ae25dc8748de4180f4c99bab6aaa3, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.045654297
+      value: 0.045655012
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e17ae25dc8748de4180f4c99bab6aaa3, type: 3}

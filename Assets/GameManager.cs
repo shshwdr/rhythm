@@ -1,3 +1,4 @@
+using Doozy.Engine.Progress;
 using Doozy.Engine.UI;
 using Pool;
 using System.Collections;
@@ -8,6 +9,8 @@ public class GameManager : Singleton<GameManager>
 {
     public bool isInGame = true;
     PlayerController player;
+
+    public Progressor bossHPBar;
 
     public UIView gameoverView;
     public RoomEnemyGenerator currentRoom;
@@ -25,7 +28,9 @@ public class GameManager : Singleton<GameManager>
         if (Input.GetKeyDown(KeyCode.R)&& !isInGame)
         {
             gameoverView.Hide();
+            //ObjectPooler.Instance.all
             EventPool.Trigger(EventPool.startGameEvent);
+
             isInGame = true;
         }
         //if (player.transform.position.y >= 1.6 && !isInGame)

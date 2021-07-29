@@ -1,3 +1,5 @@
+using Doozy.Engine.Progress;
+using Doozy.Engine.UI;
 using Pool;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,9 +8,7 @@ using UnityEngine;
 public class EnemyController : HPObjectController
 {
     public Vector2 movingDir;
-    bool isCoin;
-    bool isAbility;
-    bool isBoss;
+    public bool isBoss;
     public bool ignoreTimeControl = false;
     protected PlayerController player;
     public GameObject coin;
@@ -20,6 +20,7 @@ public class EnemyController : HPObjectController
     public bool canMoveDiagnal;
     bool canAttack;
 
+    Progressor progressor;
 
     public RoomEnemyGenerator room;
     public int attackOrder;//0 one by one // 1 sequence
@@ -29,8 +30,6 @@ public class EnemyController : HPObjectController
     public virtual void init(Vector3 dir,bool c, bool a ,bool b,int multi)
     {
         movingDir = dir;
-        isCoin = c;
-        isAbility = a;
         isBoss = b;
         maxHp = maxHp * multi;
         hp = maxHp;
@@ -40,11 +39,28 @@ public class EnemyController : HPObjectController
     public void activate()
     {
         isActive = true;
+        if (isBoss)
+        {
+            progressor = GameManager.Instance.bossHPBar;
+            progressor.GetComponent<UIView>().Show();
+            progressor.SetMax(maxHp);
+            progressor.SetValue(maxHp);
+        }
+
+        animator.enabled = true;
     }
 
     public void disactivate()
     {
         isActive = false;
+
+        if (isBoss)
+        {
+            progressor = FindObjectOfType<Progressor>();
+            progressor.GetComponent<UIView>().Hide();
+            progressor.SetMax(maxHp);
+        }
+        animator.enabled = false;
     }
 
     public override void getDamage(float damage = 1, string element = "")
@@ -52,11 +68,15 @@ public class EnemyController : HPObjectController
         base.getDamage(damage, element);
         if (isDead)
         {
-            animator.SetTrigger("die");
-
+            if (isBoss)
+            {
+                progressor.GetComponent<UIView>().Hide();
+            }
         }
         else
         {
+
+            progressor.SetValue(hp);
             animator.SetTrigger("hit");
         }
     }
@@ -69,6 +89,7 @@ public class EnemyController : HPObjectController
         player = FindObjectOfType<PlayerController>();
         originalPosition = transform.position;
         animator = GetComponentInChildren<Animator>();
+        animator.enabled = false;
         //EventPool.OptIn("Beat", Move);
         //animator.SetFloat("speed", 1);
         moveMode = 1;
@@ -170,8 +191,13 @@ public class EnemyController : HPObjectController
         }
         var attacks = GetComponents<EnemyAttack>();
         var attack = GetComponent<EnemyAttack>();
+        if(attacks.Length>1 && !isBoss)
+        {
+            Debug.LogError("not boss but get multiple attacks " + gameObject.name);
+        }
         if (attacks.Length >= 1)
         {
+            
             if(attackOrder == 0)
             {
                 //one by one
@@ -286,10 +312,13 @@ public class EnemyController : HPObjectController
             dialog.readyDialog();
             room.cleanRoom();
             room.clearRoom();
+
+            animator.SetTrigger("hit");
         }
         else
         {
 
+            animator.SetTrigger("die");
 
             List<string> explosions = new List<string>() { "explosion", "explosion1", "explosion2", "explosion3", "explosion4", };
             var selectedExplosion = explosions[Random.Range(0, explosions.Count)];
@@ -305,8 +334,8 @@ public class EnemyController : HPObjectController
     IEnumerator remove()
     {
         yield return new WaitForSeconds(0.5f);
-       // MoveController.Instance.removeEnemy(this);
-       // GetComponent<PoolObject>().returnBack();
+        MoveController.Instance.removeEnemy(this);
+        GetComponent<PoolObject>().returnBack();
     }
 
     public void reset()
@@ -314,6 +343,11 @@ public class EnemyController : HPObjectController
         GetComponent<PoolObject>().fetch();
         MoveController.Instance.addEnemy(this);
         transform.position = originalPosition;
+        var attacks = GetComponents<EnemyAttack>();
+        foreach(var attack in attacks)
+        {
+            attack.doFinish();
+        }
         getHeal();
         isDead = false;
     }

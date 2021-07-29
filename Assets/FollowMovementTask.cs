@@ -32,6 +32,7 @@ public class FollowMovementTask : MonoBehaviour
     public void active()
     {
         isActive = true;
+        GameMaster.Instance.startMoveInput();
         EventPool.OptIn("Beat", beat);
         EventPool.OptIn("player move input", checkMatch);
     }
@@ -39,6 +40,7 @@ public class FollowMovementTask : MonoBehaviour
     public void disactive()
     {
         isActive = false;
+        GameMaster.Instance.stopMoveInput();
         EventPool.OptOut("player move input", checkMatch);
         EventPool.OptOut("Beat", beat);
     }

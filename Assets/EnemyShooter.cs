@@ -7,6 +7,7 @@ public class EnemyShooter : EnemyAttack
     protected int damage = 1;
     public float shootTime = 0.3f;
     float currentShootTimer = 0f;
+    public string bulletName = "enemyBullet";
     public List<Vector2> dirs = new List<Vector2>() { new Vector2(1, 0) };
     //void Update()
     //{
@@ -20,7 +21,7 @@ public class EnemyShooter : EnemyAttack
 
     protected void generateNormalBullet(Vector3 dir, Vector3 startOffset = new Vector3())
     {
-        var bullet = ObjectPooler.Instance.GetPooledObject("enemyBullet");
+        var bullet = ObjectPooler.Instance.GetPooledObject(bulletName);
         bullet.GetComponent<EnemyStepBullet>().fetch();
         bullet.GetComponent<EnemyStepBullet>().Init(transform.position + startOffset, dir, damage);
     }

@@ -48,15 +48,16 @@ public class ObjectPooler : Singleton<ObjectPooler>
         item2.shouldExpand = false;
         addPooledItems(item2, colliderCacheParent);
 
-        EventPool.OptIn(EventPool.stopGameEvent, resetAll);
+        EventPool.OptIn(EventPool.startGameEvent, resetAll);
 
 
     }
-    void resetAll()
+    public void resetAll()
     {
         foreach(Transform trans in transform)
         {
-            trans.gameObject.SetActive(false);
+            
+            trans.GetComponent<PoolObject>().returnBack();
         }
     }
     void addPooledItems(ObjectPoolItem item, Transform trans)

@@ -41,6 +41,7 @@ MonoBehaviour:
   deathClip: {fileID: 8300000, guid: dc434f021292cd44cb057d13007af6b7, type: 3}
   facingRight: 1
   movingDir: {x: 1, y: 0}
+  isBoss: 1
   ignoreTimeControl: 0
   coin: {fileID: 0}
   ability: {fileID: 0}
@@ -210,11 +211,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 267003435626674206, guid: 6bb66bdcd0b0b8b4890f8b9c10f61d31, type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: -0.00059501827
+      value: -0.00059504807
       objectReference: {fileID: 0}
     - target: {fileID: 267003435626674206, guid: 6bb66bdcd0b0b8b4890f8b9c10f61d31, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 0.024997719
+      value: 0.025000103
       objectReference: {fileID: 0}
     - target: {fileID: 1196874217653928536, guid: 6bb66bdcd0b0b8b4890f8b9c10f61d31, type: 3}
       propertyPath: m_Name
@@ -222,7 +223,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1958535850988884655, guid: 6bb66bdcd0b0b8b4890f8b9c10f61d31, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1958535850988884655, guid: 6bb66bdcd0b0b8b4890f8b9c10f61d31, type: 3}
       propertyPath: m_LocalPosition.x
@@ -270,15 +271,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4906820447568420574, guid: 6bb66bdcd0b0b8b4890f8b9c10f61d31, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.009818047
+      value: -0.009819955
       objectReference: {fileID: 0}
     - target: {fileID: 4906820447568420574, guid: 6bb66bdcd0b0b8b4890f8b9c10f61d31, type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.40363002
+      value: 0.40363
       objectReference: {fileID: 0}
     - target: {fileID: 4906820447568420574, guid: 6bb66bdcd0b0b8b4890f8b9c10f61d31, type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 0.48623812
+      value: 0.48624003
       objectReference: {fileID: 0}
     - target: {fileID: 8931682064064346629, guid: 6bb66bdcd0b0b8b4890f8b9c10f61d31, type: 3}
       propertyPath: m_Bounds.m_Center.x
@@ -286,7 +287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8931682064064346629, guid: 6bb66bdcd0b0b8b4890f8b9c10f61d31, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.06077732
+      value: -0.060774937
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bb66bdcd0b0b8b4890f8b9c10f61d31, type: 3}
@@ -413,7 +414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1152339133140463529, guid: 5d77390d53382134482583ecfe7f553e, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1161687653152412260, guid: 5d77390d53382134482583ecfe7f553e, type: 3}
       propertyPath: m_IsActive
@@ -649,7 +650,7 @@ PrefabInstance:
       objectReference: {fileID: 22100000, guid: 1ea965598d3a5134882eee3abab967a6, type: 2}
     - target: {fileID: 6696732345328878324, guid: 5d77390d53382134482583ecfe7f553e, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8321187208437621932, guid: 5d77390d53382134482583ecfe7f553e, type: 3}
       propertyPath: m_Size.x

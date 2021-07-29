@@ -40,7 +40,7 @@ public class EnemyAttack:MonoBehaviour
 
 
     public virtual void doReady() { }
-    protected virtual void doFinish() { }
+    public virtual void doFinish() { }
     protected virtual bool isAttackFinished()
     {
         if (currentFinishRound >= finishRound)
