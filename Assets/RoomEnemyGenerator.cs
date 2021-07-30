@@ -15,6 +15,7 @@ public class RoomEnemyGenerator : MonoBehaviour
     bool isCleared = false;
     bool isActivated = false;
     Collider2D collider;
+    AudioSource audioSource;
 
     public Door toCloseDoor;
 
@@ -24,6 +25,7 @@ public class RoomEnemyGenerator : MonoBehaviour
         StartCoroutine(setup());
         collider = GetComponent<Collider2D>();
         EventPool.OptIn(EventPool.startGameEvent,resetRoom);
+        audioSource = GetComponent<AudioSource>();
     }
 
     IEnumerator setup()
@@ -86,6 +88,11 @@ public class RoomEnemyGenerator : MonoBehaviour
         {
             Debug.Log("repeat clear room");
             return;
+        }
+        if(roomMusic==3||roomMusic>0)
+        {
+
+            audioSource.Play();
         }
         isCleared = true;
         EventPool.Trigger<string>("clearRoom", roomId);

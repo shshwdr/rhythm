@@ -18,6 +18,7 @@ public class FollowMovementTask : MonoBehaviour
     DialogueSystemTrigger dialogue;
     Usable dialogUse;
     public GameObject followText;
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,7 @@ public class FollowMovementTask : MonoBehaviour
         //dialogue = GetComponent<DialogueSystemTrigger>();
         dialogUse = GetComponent<Usable>();
         dialogUse.enabled = false;
+        audioSource = GetComponent<AudioSource>();
         //dialogue.enabled = false;
     }
 
@@ -47,6 +49,7 @@ public class FollowMovementTask : MonoBehaviour
 
     void stop()
     {
+        audioSource.Play();
         finishedTask = true;
         dialogUse.enabled = true;
         followText.SetActive(false);

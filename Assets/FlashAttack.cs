@@ -101,6 +101,15 @@ public class FlashAttack : EnemyAttack
                         var blade = readyParent.GetChild(index);
                         blade.transform.position = transform.position + (Vector3)position * gridSize;
                         blade.gameObject.SetActive(true);
+                        if(dir.y == 0)
+                        {
+                            blade.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 90));
+                        }
+                        else
+                        {
+
+                            blade.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                        }
                     }
                     else
                     {
@@ -129,6 +138,7 @@ public class FlashAttack : EnemyAttack
             {
                 var blade = attackParent.GetChild(index);
                 blade.transform.position = readyChild.position;
+                blade.transform.rotation = readyChild.rotation;
                 blade.gameObject.SetActive(true);
                 index++;
             }

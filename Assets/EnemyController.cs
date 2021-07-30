@@ -9,6 +9,7 @@ public class EnemyController : HPObjectController
 {
     public Vector2 movingDir;
     public bool isBoss;
+    public bool willBeBack;
     public bool ignoreTimeControl = false;
     protected PlayerController player;
     public GameObject coin;
@@ -48,6 +49,8 @@ public class EnemyController : HPObjectController
         }
 
         animator.enabled = true;
+        animator.Rebind();
+        StartCoroutine(resetColor());
     }
 
     public void disactivate()
@@ -307,14 +310,29 @@ public class EnemyController : HPObjectController
     protected override void Die()
     {
         base.Die();
+
+        var attacks = GetComponents<EnemyAttack>();
+        foreach (var attack in attacks)
+        {
+            attack.doFinish();
+        }
         var dialog = GetComponent<DialogEnemy>();
         if (dialog)
         {
             dialog.readyDialog();
             room.cleanRoom();
             room.clearRoom();
+            if (willBeBack)
+            {
 
-            animator.SetTrigger("hit");
+                animator.SetTrigger("die");
+            StartCoroutine(remove());
+            }
+            else
+            {
+
+                animator.SetTrigger("hit");
+            }
         }
         else
         {
@@ -335,8 +353,15 @@ public class EnemyController : HPObjectController
     IEnumerator remove()
     {
         yield return new WaitForSeconds(0.5f);
-        MoveController.Instance.removeEnemy(this);
-        GetComponent<PoolObject>().returnBack();
+        if (willBeBack)
+        {
+            animator.SetTrigger("back");
+        }
+        else
+        {
+            MoveController.Instance.removeEnemy(this);
+            GetComponent<PoolObject>().returnBack();
+        }
     }
 
     public void reset()
@@ -351,6 +376,17 @@ public class EnemyController : HPObjectController
         }
         getHeal();
         isDead = false;
+        animator.Rebind();
+        StartCoroutine(resetColor());
+    }
+
+    IEnumerator resetColor()
+    {
+        yield return new WaitForSeconds(0.1f);
+        foreach (var sprite in GetComponentsInChildren<SpriteRenderer>())
+        {
+            sprite.color = Color.white;
+        }
     }
 
     public void softReset()

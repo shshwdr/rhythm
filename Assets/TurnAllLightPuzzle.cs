@@ -20,7 +20,7 @@ public class TurnAllLightPuzzle : MonoBehaviour
     {
         if (!finishedPuzzle)
         {
-
+            GetComponent<AudioSource>().Play();
         finishedPuzzle = true;
         EventPool.Trigger<string>("clearRoom", roomId);
         }

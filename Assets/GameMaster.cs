@@ -91,12 +91,15 @@ public class GameMaster : Singleton<GameMaster>
     PlayerController player;
 
     //fever variables
-    bool fever;
-    float feverTimeHold;
-    public Image feverSprite;
+    //bool fever;
+    //float feverTimeHold;
+    //public Image feverSprite;
 
     public float extraLayerVolume = 0.3f;
 
+    float lastPlayerMasterBeat;
+    float lastAllowBeat;
+    
     void Start()
     {
         allowedToBeat = true;
@@ -125,6 +128,11 @@ public class GameMaster : Singleton<GameMaster>
 
         beatFallTime = errorMarginTime;
         StartCoroutine(startBeat());
+        //invokeTime = 60f / beatsPerMinute;
+        //audioSources[1].Play();
+        //lastPlayerMasterBeat = errorMarginTime / 2f;
+        //lastAllowBeat = 0;
+
     }
 
     IEnumerator startBeat()
@@ -136,6 +144,17 @@ public class GameMaster : Singleton<GameMaster>
         InvokeRepeating("AllowBeat", 0f, invokeTime);
 
         yield return new WaitForSeconds(errorMarginTime / 2f);
+
+
+        for (int i = 1; i < audioSources.Length; i++)
+        {
+            audioSources[i].time = 0;
+            if (audioSources[i].isPlaying)
+            {
+
+                audioSources[i].Play();
+            }
+        }
         audioSources[1].Play();
         //audioSources[2].Play();
         //GameManager.Instance.GetComponent<AudioSource>().Play();
@@ -157,7 +176,38 @@ public class GameMaster : Singleton<GameMaster>
         // Tween a float called myFloat to 52 in 1 second
         //DOTween.To(() => myFloat, x => myFloat = x, 52, 1);
     }
+    public void FixedUpdate()
+    {
+        if(audioSources[1].clip.length - audioSources[1].time < 1)
+        {
+            audioSources[1].time = 0;
+            audioSources[1].Play();
+            for(int i = 1; i < audioSources.Length; i++)
+            {
+                if (audioSources[i].isPlaying)
+                {
 
+                    audioSources[i].time = 0;
+                    audioSources[i].Play();
+                }
+            }
+        }
+        //if (lastAllowBeat - audioSources[1].time >10)
+        //{
+        //    lastPlayerMasterBeat = errorMarginTime / 2f;
+        //    lastAllowBeat = 0;
+        //}
+        //    if (audioSources[1].time - lastAllowBeat >= invokeTime-0.05f)
+        //{
+        //    AllowBeat();
+        //    lastAllowBeat += invokeTime;
+        //}
+        //if (audioSources[1].time - lastPlayerMasterBeat >= invokeTime - 0.05f)
+        //{
+        //    PlayMasterBeat();
+        //    lastPlayerMasterBeat += invokeTime;
+        //}
+    }
     public void removeAudioSource(int i)
     {
         if (i <= 0)
@@ -173,6 +223,12 @@ public class GameMaster : Singleton<GameMaster>
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            CancelInvoke();
+
+            StartCoroutine(startBeat());
+        }
         beatFallTime -= Time.deltaTime;
         if (beatFallTime < 0f)
         {
@@ -239,22 +295,22 @@ public class GameMaster : Singleton<GameMaster>
 
 
         //continuos beats required to maintain fever
-        if (commandCount >= 4)
-        {
-            fever = true;
-            feverSprite.gameObject.SetActive(true);
-        }
+        //if (commandCount >= 4)
+        //{
+        //    fever = true;
+        //    feverSprite.gameObject.SetActive(true);
+        //}
 
-        if (inactiveBeatCount >= 0)
-        {
-            feverTimeHold = Time.time;
-        }
-        if (Time.time - feverTimeHold >= ((errorMarginTime) * 2) + 1f && fever)
-        {
-            commandCount = 0;
-            fever = false;
-            feverSprite.gameObject.SetActive(false);
-        }
+        //if (inactiveBeatCount >= 0)
+        //{
+        //    feverTimeHold = Time.time;
+        //}
+        //if (Time.time - feverTimeHold >= ((errorMarginTime) * 2) + 1f && fever)
+        //{
+        //    commandCount = 0;
+        //    fever = false;
+        //    feverSprite.gameObject.SetActive(false);
+        //}
     }
 
     void clearCommand()
@@ -348,8 +404,8 @@ public class GameMaster : Singleton<GameMaster>
                             commandType[i] = 1;
                             hasBeatInput = true;
                             audioSourceSFX.PlayOneShot(drumLeft);
-                            currentDrumSprite = drumLeftSprite;
-                            currentDrumSprite.color = flashColor;
+                            //currentDrumSprite = drumLeftSprite;
+                            //currentDrumSprite.color = flashColor;
                             EventPool.Trigger("BeatDown", i, 1);
                             break;
                         }
@@ -359,8 +415,8 @@ public class GameMaster : Singleton<GameMaster>
                             commandType[i] = 2;
                             hasBeatInput = true;
                             audioSourceSFX.PlayOneShot(drumRight);
-                            currentDrumSprite = drumRightSprite;
-                            currentDrumSprite.color = flashColor;
+                            //currentDrumSprite = drumRightSprite;
+                            //currentDrumSprite.color = flashColor;
                             EventPool.Trigger("BeatDown", i, 2);
                             break;
                         }
@@ -370,8 +426,8 @@ public class GameMaster : Singleton<GameMaster>
                             commandType[i] = 3;
                             hasBeatInput = true;
                             audioSourceSFX.PlayOneShot(drumTop);
-                            currentDrumSprite = drumTopSprite;
-                            currentDrumSprite.color = flashColor;
+                            //currentDrumSprite = drumTopSprite;
+                            //currentDrumSprite.color = flashColor;
                             EventPool.Trigger("BeatDown", i, 3);
                             break;
                         }
@@ -381,8 +437,8 @@ public class GameMaster : Singleton<GameMaster>
                             commandType[i] = 4;
                             hasBeatInput = true;
                             audioSourceSFX.PlayOneShot(drumDown);
-                            currentDrumSprite = drumBottomSprite;
-                            currentDrumSprite.color = flashColor;
+                            //currentDrumSprite = drumBottomSprite;
+                            //currentDrumSprite.color = flashColor;
                             EventPool.Trigger("BeatDown", i, 4);
                             break;
                         }
